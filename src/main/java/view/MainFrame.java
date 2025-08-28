@@ -4,12 +4,17 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ThachHien
  */
 public class MainFrame extends javax.swing.JFrame {
     
+    private CardLayout cardLayout;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
@@ -17,6 +22,22 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+
+    // CardLayout cho MainPanel
+    cardLayout = new CardLayout();
+    MainPanel.setLayout(cardLayout);
+
+    // Thêm các panel con
+    MainPanel.add(new KhachHangPanel(), "QL_KHACHHANG");
+    MainPanel.add(new PhongTroPanel(), "QL_PHONGTRO");
+    MainPanel.add(new LoaiPhongPanel(), "QL_LOAIPHONG");
+    MainPanel.add(new DichVuPanel(), "QL_DICHVU");
+    MainPanel.add(new HopDongPanel(), "QL_HOPDONG");
+    MainPanel.add(new HoaDonPanel(), "QL_HOADON");
+    MainPanel.add(new ThongKePanel(), "THONGKE");
+
+    // Hiển thị mặc định (ví dụ logo hay panel đầu tiên)
+    cardLayout.show(MainPanel, "QL_KHACHHANG"); 
     }
 
     /**
@@ -32,7 +53,6 @@ public class MainFrame extends javax.swing.JFrame {
         TopPanel = new javax.swing.JPanel();
         lblLoiChao = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         LogoPanel = new javax.swing.JPanel();
         btnLOGO = new javax.swing.JButton();
         SideBarPanel = new javax.swing.JPanel();
@@ -76,25 +96,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         MainPanel.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LOGO");
-
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(279, 279, 279))
+            .addGap(0, 1071, Short.MAX_VALUE)
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 658, Short.MAX_VALUE)
         );
 
         LogoPanel.setBackground(new java.awt.Color(153, 255, 255));
@@ -123,32 +133,67 @@ public class MainFrame extends javax.swing.JFrame {
         SideBarPanel.setBackground(new java.awt.Color(153, 255, 255));
 
         btnPhongTro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPhongTro.setForeground(new java.awt.Color(153, 255, 255));
+        btnPhongTro.setForeground(new java.awt.Color(255, 255, 255));
         btnPhongTro.setText("Phòng Trọ");
+        btnPhongTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhongTroActionPerformed(evt);
+            }
+        });
 
         btnLoaiPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLoaiPhong.setForeground(new java.awt.Color(153, 255, 255));
+        btnLoaiPhong.setForeground(new java.awt.Color(255, 255, 255));
         btnLoaiPhong.setText("Loại Phòng");
+        btnLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoaiPhongActionPerformed(evt);
+            }
+        });
 
         btnDichVu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnDichVu.setForeground(new java.awt.Color(153, 255, 255));
+        btnDichVu.setForeground(new java.awt.Color(255, 255, 255));
         btnDichVu.setText("Dịch Vụ");
+        btnDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDichVuActionPerformed(evt);
+            }
+        });
 
         btnHopDong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHopDong.setForeground(new java.awt.Color(153, 255, 255));
+        btnHopDong.setForeground(new java.awt.Color(255, 255, 255));
         btnHopDong.setText("Hợp Đồng");
+        btnHopDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHopDongActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnKhachHang.setForeground(new java.awt.Color(153, 255, 255));
+        btnKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         btnKhachHang.setText("Khách Hàng");
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
 
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHoaDon.setForeground(new java.awt.Color(153, 255, 255));
+        btnHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         btnHoaDon.setText("Hóa Đơn");
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
 
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnThongKe.setForeground(new java.awt.Color(153, 255, 255));
+        btnThongKe.setForeground(new java.awt.Color(255, 255, 255));
         btnThongKe.setText("Thống Kê");
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SideBarPanelLayout = new javax.swing.GroupLayout(SideBarPanel);
         SideBarPanel.setLayout(SideBarPanelLayout);
@@ -229,6 +274,34 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        cardLayout.show(MainPanel, "QL_KHACHHANG");
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnPhongTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongTroActionPerformed
+        cardLayout.show(MainPanel, "QL_PHONGTRO");
+    }//GEN-LAST:event_btnPhongTroActionPerformed
+
+    private void btnLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiPhongActionPerformed
+        cardLayout.show(MainPanel, "QL_LOAIPHONG");
+    }//GEN-LAST:event_btnLoaiPhongActionPerformed
+
+    private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
+        cardLayout.show(MainPanel, "QL_DICHVU");
+    }//GEN-LAST:event_btnDichVuActionPerformed
+
+    private void btnHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHopDongActionPerformed
+        cardLayout.show(MainPanel, "QL_HOPDONG");
+    }//GEN-LAST:event_btnHopDongActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        cardLayout.show(MainPanel, "QL_HOADON");
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        cardLayout.show(MainPanel, "THONGKE");
+    }//GEN-LAST:event_btnThongKeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,7 +340,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLoaiPhong;
     private javax.swing.JButton btnPhongTro;
     private javax.swing.JButton btnThongKe;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLoiChao;
     // End of variables declaration//GEN-END:variables
