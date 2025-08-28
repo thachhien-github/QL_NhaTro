@@ -4,12 +4,6 @@
  */
 package view;
 
-import java.sql.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import model.DocGia;
-import model.DocGiaDAO;
 
 /**
  *
@@ -17,15 +11,12 @@ import model.DocGiaDAO;
  */
 public class KhachHangPanel extends javax.swing.JPanel {
 
-    private DefaultTableModel tableModel;
-    private DocGiaDAO docGiaDAO = new DocGiaDAO();
 
     /**
      * Creates new form QuanLyDocGiaPanel
      */
     public KhachHangPanel() {
-        initComponents();
-        loadData();
+
     }
 
     /**
@@ -253,98 +244,15 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        try {
-            String hoTen = txtHoTen.getText();
-            Date ngaySinh = new Date(txtNgaySinh.getDate().getTime());
-            String diaChi = txtDiaChi.getText();
-            String sdt = txtDienThoai.getText();
-            String email = txtEmail.getText();
-
-            DocGia dg = new DocGia(0, hoTen, ngaySinh, diaChi, sdt, email); // 0 vì auto-increment
-            DocGiaDAO dao = new DocGiaDAO();
-
-            if (dao.insertDocGia(dg)) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                loadData();
-                lamMoi();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại!");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi dữ liệu: " + e.getMessage());
-            e.printStackTrace();
-        }
+        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int row = tblDocGia.getSelectedRow();
-    if (row < 0) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng để sửa!");
-        return;
-    }
-
-    try {
-        int maDocGia = Integer.parseInt(tblDocGia.getValueAt(row, 0).toString());
-        String hoTen = txtHoTen.getText().trim();
-        if (hoTen.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Họ tên không được để trống!");
-            return;
-        }
-
-        java.util.Date ngaySinhDate = txtNgaySinh.getDate();
-        if (ngaySinhDate == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày sinh!");
-            return;
-        }
-        java.sql.Date ngaySinh = new java.sql.Date(ngaySinhDate.getTime());
-
-        String diaChi = txtDiaChi.getText().trim();
-        String sdt = txtDienThoai.getText().trim();
-        String email = txtEmail.getText().trim();
-
-        DocGia dg = new DocGia(maDocGia, hoTen, ngaySinh, diaChi, sdt, email);
-        DocGiaDAO dao = new DocGiaDAO();
-
-        if (dao.updateDocGia(dg)) {
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-            loadData();
-            lamMoi();
-        } else {
-            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi dữ liệu: " + e.getMessage());
-        e.printStackTrace();
-    }
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int row = tblDocGia.getSelectedRow();
-    if (row < 0) {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng để xóa!");
-        return;
-    }
-
-    int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-    if (confirm != JOptionPane.YES_OPTION) {
-        return;
-    }
-
-    try {
-        int maDocGia = Integer.parseInt(tblDocGia.getValueAt(row, 0).toString());
-        DocGiaDAO dao = new DocGiaDAO();
-
-        if (dao.deleteDocGia(maDocGia)) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            loadData();
-            lamMoi();
-        } else {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại!");
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi dữ liệu: " + e.getMessage());
-        e.printStackTrace();
-    }
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -352,63 +260,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        try {
-        String keyword = txtHoTen.getText().trim();
-        if (keyword.isEmpty()) {
-            loadData(); // nếu không nhập gì, load tất cả
-            return;
-        }
-
-        DocGiaDAO dao = new DocGiaDAO();
-        List<DocGia> list = dao.searchDocGia(keyword); // tìm theo họ tên
-
-        // Tạo lại table model với kết quả tìm kiếm
-        String[] columnNames = {"Mã", "Họ tên", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Email"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-
-        for (DocGia dg : list) {
-            Object[] row = {
-                dg.getMaDocGia(),
-                dg.getHoTen(),
-                dg.getNgaySinh(),
-                dg.getDiaChi(),
-                dg.getSoDienThoai(),
-                dg.getEmail()
-            };
-            tableModel.addRow(row);
-        }
-
-        tblDocGia.setModel(tableModel);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm!");
-        e.printStackTrace();
-    }
+        
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblDocGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocGiaMouseClicked
-        int row = tblDocGia.getSelectedRow();
-        if (row >= 0) {
-            txtHoTen.setText(tblDocGia.getValueAt(row, 1).toString());
-
-            // Ngày sinh
-            Object ngaySinhObj = tblDocGia.getValueAt(row, 2);
-            if (ngaySinhObj != null) {
-                if (ngaySinhObj instanceof Date) {
-                    txtNgaySinh.setDate((Date) ngaySinhObj);
-                } else {
-                    // nếu là java.util.Date
-                    txtNgaySinh.setDate(new Date(((java.util.Date) ngaySinhObj).getTime()));
-                }
-            } else {
-                txtNgaySinh.setDate(null);
-            }
-
-            txtDiaChi.setText(tblDocGia.getValueAt(row, 3).toString());
-            txtDienThoai.setText(tblDocGia.getValueAt(row, 4).toString());
-            txtEmail.setText(tblDocGia.getValueAt(row, 5).toString());
-        }
-    
+        
     }//GEN-LAST:event_tblDocGiaMouseClicked
 
 
@@ -438,30 +294,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void loadData() {
-        String[] columnNames = {"Mã", "Họ tên", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Email"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-
-        List<DocGia> list = DocGiaDAO.getAll();
-        for (DocGia dg : list) {
-            Object[] row = {
-                dg.getMaDocGia(),
-                dg.getHoTen(),
-                dg.getNgaySinh(),
-                dg.getDiaChi(),
-                dg.getSoDienThoai(),
-                dg.getEmail()
-            };
-            tableModel.addRow(row);
-        }
-        tblDocGia.setModel(tableModel);
+        
     }
 
     private void lamMoi() {
-        txtHoTen.setText("");
-        txtCCCD.setText("");
-        txtDiaChi.setText("");
-        txtDienThoai.setText("");
-        txtEmail.setText("");
+        
     }
 
 }

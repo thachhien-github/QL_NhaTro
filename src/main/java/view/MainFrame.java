@@ -32,6 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
         TopPanel = new javax.swing.JPanel();
         lblLoiChao = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         LogoPanel = new javax.swing.JPanel();
         btnLOGO = new javax.swing.JButton();
         SideBarPanel = new javax.swing.JPanel();
@@ -75,15 +76,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         MainPanel.setBackground(new java.awt.Color(153, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("LOGO");
+
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(279, 279, 279))
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         LogoPanel.setBackground(new java.awt.Color(153, 255, 255));
@@ -256,6 +267,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLoaiPhong;
     private javax.swing.JButton btnPhongTro;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLoiChao;
     // End of variables declaration//GEN-END:variables
