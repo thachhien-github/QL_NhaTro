@@ -40,6 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
         MainPanel.add(phongPanel, "QL_PHONG");
         MainPanel.add(new XePanel(), "QL_XE");
         MainPanel.add(new HopDongPanel(), "QL_HOPDONG");
+        MainPanel.add(new ChiSoPanel(), "CHISO");
         MainPanel.add(new HoaDonPanel(), "QL_HOADON");
         MainPanel.add(new ThongKePanel(), "THONGKE");
 
@@ -68,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnKhachHang = new javax.swing.JButton();
         btnHoaDon = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        btnChiSo = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -182,12 +183,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogout.setText("Đăng Xuất");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+        btnChiSo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnChiSo.setForeground(new java.awt.Color(255, 255, 255));
+        btnChiSo.setText("Chỉ Số Điện Nước");
+        btnChiSo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
+                btnChiSoActionPerformed(evt);
             }
         });
 
@@ -204,7 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnChiSo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SideBarPanelLayout.setVerticalGroup(
@@ -219,12 +220,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXe, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnChiSo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         MainPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -307,9 +308,9 @@ public class MainFrame extends javax.swing.JFrame {
         cardLayout.show(MainPanel, "THONGKE");
     }//GEN-LAST:event_btnThongKeActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    private void btnChiSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiSoActionPerformed
+        cardLayout.show(MainPanel, "CHISO");
+    }//GEN-LAST:event_btnChiSoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,11 +350,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel SideBarPanel;
     private javax.swing.JPanel TopPanel;
+    private javax.swing.JButton btnChiSo;
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnHopDong;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnLOGO;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPhong;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JButton btnXe;
