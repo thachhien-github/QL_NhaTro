@@ -6,6 +6,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -13,30 +15,36 @@ import javax.swing.JPanel;
  * @author ThachHien
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     private CardLayout cardLayout;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame() throws SQLException {
         initComponents();
 
-    // CardLayout cho MainPanel
-    cardLayout = new CardLayout();
-    MainPanel.setLayout(cardLayout);
+        // CardLayout cho MainPanel
+        cardLayout = new CardLayout();
+        MainPanel.setLayout(cardLayout);
 
-    // Thêm các panel con
-    MainPanel.add(new KhachThuePanel(), "QL_KHACHTHUE");
-    MainPanel.add(new PhongPanel(), "QL_PHONG");
-    MainPanel.add(new XePanel(), "QL_XE");
-    MainPanel.add(new HopDongPanel(), "QL_HOPDONG");
-    MainPanel.add(new HoaDonPanel(), "QL_HOADON");
-    MainPanel.add(new ThongKePanel(), "THONGKE");
+// Tạo sẵn panel Phòng
+        PhongPanel phongPanel = new PhongPanel();
 
-    // Hiển thị mặc định (ví dụ logo hay panel đầu tiên)
-    cardLayout.show(MainPanel, "QL_KHACHHANG"); 
+// Truyền phongPanel vào KhachThuePanel
+        KhachThuePanel khachPanel = new KhachThuePanel(phongPanel);
+
+// Add vào CardLayout
+        MainPanel.add(khachPanel, "QL_KHACHTHUE");
+        MainPanel.add(phongPanel, "QL_PHONG");
+        MainPanel.add(new XePanel(), "QL_XE");
+        MainPanel.add(new HopDongPanel(), "QL_HOPDONG");
+        MainPanel.add(new HoaDonPanel(), "QL_HOADON");
+        MainPanel.add(new ThongKePanel(), "THONGKE");
+
+        // Hiển thị mặc định (ví dụ logo hay panel đầu tiên)
+        cardLayout.show(MainPanel, "QL_KHACHTHUE");
     }
 
     /**
@@ -51,7 +59,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         TopPanel = new javax.swing.JPanel();
         lblLoiChao = new javax.swing.JLabel();
-        MainPanel = new javax.swing.JPanel();
         LogoPanel = new javax.swing.JPanel();
         btnLOGO = new javax.swing.JButton();
         SideBarPanel = new javax.swing.JPanel();
@@ -62,15 +69,17 @@ public class MainFrame extends javax.swing.JFrame {
         btnHoaDon = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        MainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1358, 777));
+        setMaximumSize(new java.awt.Dimension(1080, 630));
+        setMinimumSize(new java.awt.Dimension(1080, 630));
         setName("MainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1358, 777));
+        setPreferredSize(new java.awt.Dimension(1180, 700));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        TopPanel.setBackground(new java.awt.Color(153, 255, 255));
+        TopPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         lblLoiChao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLoiChao.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,26 +97,13 @@ public class MainFrame extends javax.swing.JFrame {
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(TopPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblLoiChao, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MainPanel.setBackground(new java.awt.Color(153, 255, 255));
-
-        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
-        MainPanel.setLayout(MainPanelLayout);
-        MainPanelLayout.setHorizontalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        MainPanelLayout.setVerticalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        LogoPanel.setBackground(new java.awt.Color(153, 255, 255));
+        LogoPanel.setBackground(new java.awt.Color(204, 204, 204));
         LogoPanel.setMaximumSize(new java.awt.Dimension(275, 150));
 
         btnLOGO.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -130,7 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        SideBarPanel.setBackground(new java.awt.Color(153, 255, 255));
+        SideBarPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         btnPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPhong.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,6 +227,19 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        MainPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -242,7 +251,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +333,15 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+        MainFrame frame = null;
+            try {
+                frame = new MainFrame();
+            } catch (SQLException ex) {
+                System.getLogger(MainFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        frame.setVisible(true);
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

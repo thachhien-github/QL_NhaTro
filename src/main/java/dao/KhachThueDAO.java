@@ -18,6 +18,7 @@ import model.KhachThue;
  * @author ThachHien
  */
 public class KhachThueDAO {
+
     private Connection conn;
 
     public KhachThueDAO(Connection conn) {
@@ -26,8 +27,7 @@ public class KhachThueDAO {
 
     // ===== CREATE =====
     public boolean insert(KhachThue kt) {
-        String sql = "INSERT INTO KhachThue(MaKT, HoTen, GioiTinh, NgaySinh, CCCD, DiaChi, SDT, MaPhong) "
-                   + "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO KhachThue(MaKT, HoTen, GioiTinh, NgaySinh, CCCD, DiaChi, SDT, MaPhong) VALUES (?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, kt.getMaKT());
             ps.setString(2, kt.getHoTen());
@@ -123,4 +123,5 @@ public class KhachThueDAO {
             return false;
         }
     }
+
 }
