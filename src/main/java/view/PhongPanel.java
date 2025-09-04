@@ -9,13 +9,13 @@ package view;
  *
  * @author ADMIN
  */
-public class PhongTroPanel extends javax.swing.JPanel {
+public class PhongPanel extends javax.swing.JPanel {
 
 
     /**
      * Creates new form QuanLyDocGiaPanel
      */
-    public PhongTroPanel() {
+    public PhongPanel() {
         initComponents();
 
     }
@@ -237,7 +237,7 @@ public class PhongTroPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addContainerGap())

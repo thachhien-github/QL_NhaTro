@@ -28,10 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
     MainPanel.setLayout(cardLayout);
 
     // Thêm các panel con
-    MainPanel.add(new KhachHangPanel(), "QL_KHACHHANG");
-    MainPanel.add(new PhongTroPanel(), "QL_PHONGTRO");
-    MainPanel.add(new LoaiPhongPanel(), "QL_LOAIPHONG");
-    MainPanel.add(new DichVuPanel(), "QL_DICHVU");
+    MainPanel.add(new KhachThuePanel(), "QL_KHACHTHUE");
+    MainPanel.add(new PhongPanel(), "QL_PHONG");
+    MainPanel.add(new XePanel(), "QL_XE");
     MainPanel.add(new HopDongPanel(), "QL_HOPDONG");
     MainPanel.add(new HoaDonPanel(), "QL_HOADON");
     MainPanel.add(new ThongKePanel(), "THONGKE");
@@ -56,13 +55,13 @@ public class MainFrame extends javax.swing.JFrame {
         LogoPanel = new javax.swing.JPanel();
         btnLOGO = new javax.swing.JButton();
         SideBarPanel = new javax.swing.JPanel();
-        btnPhongTro = new javax.swing.JButton();
-        btnLoaiPhong = new javax.swing.JButton();
-        btnDichVu = new javax.swing.JButton();
+        btnPhong = new javax.swing.JButton();
+        btnXe = new javax.swing.JButton();
         btnHopDong = new javax.swing.JButton();
         btnKhachHang = new javax.swing.JButton();
         btnHoaDon = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1358, 777));
@@ -133,30 +132,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         SideBarPanel.setBackground(new java.awt.Color(153, 255, 255));
 
-        btnPhongTro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPhongTro.setForeground(new java.awt.Color(255, 255, 255));
-        btnPhongTro.setText("Phòng Trọ");
-        btnPhongTro.addActionListener(new java.awt.event.ActionListener() {
+        btnPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPhong.setForeground(new java.awt.Color(255, 255, 255));
+        btnPhong.setText("Phòng");
+        btnPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPhongTroActionPerformed(evt);
+                btnPhongActionPerformed(evt);
             }
         });
 
-        btnLoaiPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLoaiPhong.setForeground(new java.awt.Color(255, 255, 255));
-        btnLoaiPhong.setText("Loại Phòng");
-        btnLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
+        btnXe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnXe.setForeground(new java.awt.Color(255, 255, 255));
+        btnXe.setText("Xe");
+        btnXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoaiPhongActionPerformed(evt);
-            }
-        });
-
-        btnDichVu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnDichVu.setForeground(new java.awt.Color(255, 255, 255));
-        btnDichVu.setText("Dịch Vụ");
-        btnDichVu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDichVuActionPerformed(evt);
+                btnXeActionPerformed(evt);
             }
         });
 
@@ -196,6 +186,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setText("Đăng Xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SideBarPanelLayout = new javax.swing.GroupLayout(SideBarPanel);
         SideBarPanel.setLayout(SideBarPanelLayout);
         SideBarPanelLayout.setHorizontalGroup(
@@ -204,31 +203,31 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(SideBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHopDong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                    .addComponent(btnPhongTro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoaiPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SideBarPanelLayout.setVerticalGroup(
             SideBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SideBarPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPhongTro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHopDong, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXe, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -276,20 +275,16 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
-        cardLayout.show(MainPanel, "QL_KHACHHANG");
+        cardLayout.show(MainPanel, "QL_KHACHTHUE");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
-    private void btnPhongTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongTroActionPerformed
-        cardLayout.show(MainPanel, "QL_PHONGTRO");
-    }//GEN-LAST:event_btnPhongTroActionPerformed
+    private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
+        cardLayout.show(MainPanel, "QL_PHONG");
+    }//GEN-LAST:event_btnPhongActionPerformed
 
-    private void btnLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiPhongActionPerformed
-        cardLayout.show(MainPanel, "QL_LOAIPHONG");
-    }//GEN-LAST:event_btnLoaiPhongActionPerformed
-
-    private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
-        cardLayout.show(MainPanel, "QL_DICHVU");
-    }//GEN-LAST:event_btnDichVuActionPerformed
+    private void btnXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXeActionPerformed
+        cardLayout.show(MainPanel, "QL_XE");
+    }//GEN-LAST:event_btnXeActionPerformed
 
     private void btnHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHopDongActionPerformed
         cardLayout.show(MainPanel, "QL_HOPDONG");
@@ -302,6 +297,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         cardLayout.show(MainPanel, "THONGKE");
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,14 +332,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel SideBarPanel;
     private javax.swing.JPanel TopPanel;
-    private javax.swing.JButton btnDichVu;
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnHopDong;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnLOGO;
-    private javax.swing.JButton btnLoaiPhong;
-    private javax.swing.JButton btnPhongTro;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnPhong;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnXe;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLoiChao;
     // End of variables declaration//GEN-END:variables
