@@ -73,9 +73,10 @@ public class XePanel extends javax.swing.JPanel {
                     xe.getMaKT(),
                     xe.getBienSo(),
                     xe.getLoaiXe(),
-                    xe.getPhiGiuXe()
+                    String.format("%,.0f đ", xe.getPhiGiuXe()) // format tiền
                 });
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Lỗi load dữ liệu: " + ex.getMessage());
         }

@@ -9,6 +9,7 @@ package model;
  * @author ThachHien
  */
 public class Phong {
+
     private String maPhong;
     private String tenPhong;
     private String loaiPhong;
@@ -62,6 +63,5 @@ public class Phong {
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-    
-    
+
 }

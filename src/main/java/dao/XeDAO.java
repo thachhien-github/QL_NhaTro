@@ -11,12 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Xe;
+import util.DBConnection;
 
 /**
  *
  * @author ThachHien
  */
 public class XeDAO {
+
     private Connection conn;
 
     public XeDAO(Connection conn) {
@@ -27,8 +29,7 @@ public class XeDAO {
     public List<Xe> getAllXe() throws SQLException {
         List<Xe> list = new ArrayList<>();
         String sql = "SELECT * FROM Xe";
-        try (PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Xe xe = new Xe(
                         rs.getString("MaXe"),
@@ -77,4 +78,7 @@ public class XeDAO {
             return ps.executeUpdate() > 0;
         }
     }
+
+    
+
 }

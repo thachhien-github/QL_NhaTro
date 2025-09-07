@@ -15,13 +15,13 @@ public class HoaDon {
     private String maPhong;
     private int thang;
     private int nam;
-    private BigDecimal tienPhong;
-    private BigDecimal tienDien;
-    private BigDecimal tienNuoc;
-    private BigDecimal tienXe;
-    private BigDecimal tongTien;
+    private double tienPhong;
+    private double tienDien;
+    private double tienNuoc;
+    private double tienXe;
+    private double tongTien;
 
-    public HoaDon(String maHDon, String maPhong, int thang, int nam, BigDecimal tienPhong, BigDecimal tienDien, BigDecimal tienNuoc, BigDecimal tienXe, BigDecimal tongTien) {
+    public HoaDon(String maHDon, String maPhong, int thang, int nam, double tienPhong, double tienDien, double tienNuoc, double tienXe, double tongTien) {
         this.maHDon = maHDon;
         this.maPhong = maPhong;
         this.thang = thang;
@@ -32,19 +32,6 @@ public class HoaDon {
         this.tienXe = tienXe;
         this.tongTien = tongTien;
     }
-
-    public HoaDon(String maHDon, String maPhong, int thang, int nam, BigDecimal tienPhong, BigDecimal tienDien, BigDecimal tienNuoc, BigDecimal tienXe) {
-        this.maHDon = maHDon;
-        this.maPhong = maPhong;
-        this.thang = thang;
-        this.nam = nam;
-        this.tienPhong = tienPhong;
-        this.tienDien = tienDien;
-        this.tienNuoc = tienNuoc;
-        this.tienXe = tienXe;
-    }
-    
-    public HoaDon() {}
 
     public String getMaHDon() {
         return maHDon;
@@ -78,61 +65,46 @@ public class HoaDon {
         this.nam = nam;
     }
 
-    public BigDecimal getTienPhong() {
+    public double getTienPhong() {
         return tienPhong;
     }
 
-    public void setTienPhong(BigDecimal tienPhong) {
+    public void setTienPhong(double tienPhong) {
         this.tienPhong = tienPhong;
     }
 
-    public BigDecimal getTienDien() {
+    public double getTienDien() {
         return tienDien;
     }
 
-    public void setTienDien(BigDecimal tienDien) {
+    public void setTienDien(double tienDien) {
         this.tienDien = tienDien;
     }
 
-    public BigDecimal getTienNuoc() {
+    public double getTienNuoc() {
         return tienNuoc;
     }
 
-    public void setTienNuoc(BigDecimal tienNuoc) {
+    public void setTienNuoc(double tienNuoc) {
         this.tienNuoc = tienNuoc;
     }
 
-    public BigDecimal getTienXe() {
+    public double getTienXe() {
         return tienXe;
     }
 
-    public void setTienXe(BigDecimal tienXe) {
+    public void setTienXe(double tienXe) {
         this.tienXe = tienXe;
     }
 
-    public BigDecimal getTongTien() {
+    public double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(BigDecimal tongTien) {
+    public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
+    
+    
 
-    @Override
-    public String toString() {
-        return "HoaDon{" +
-                "maHDon='" + maHDon + '\'' +
-                ", maPhong='" + maPhong + '\'' +
-                ", thang=" + thang +
-                ", nam=" + nam +
-                ", tienPhong=" + tienPhong +
-                ", tienDien=" + tienDien +
-                ", tienNuoc=" + tienNuoc +
-                ", tienXe=" + tienXe +
-                ", tongTien=" + tongTien +
-                '}';
-    }
-    
-    
-    
 }

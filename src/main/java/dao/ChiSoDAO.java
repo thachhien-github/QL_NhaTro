@@ -9,85 +9,114 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import model.ChiSo;
 import java.util.ArrayList;
 import java.util.List;
-import model.ChiSo;
+import util.DBConnection;
 
 /**
  *
  * @author ThachHien
  */
 public class ChiSoDAO {
+
     private Connection conn;
 
-    public ChiSoDAO(Connection conn) {
+    public ChiSoDAO(Connection conn, Object par1) {
         this.conn = conn;
     }
+    
+    // Constructor mặc định (tự tạo connection)
+    public ChiSoDAO() {
+        this.conn = DBConnection.getConnection();
+    }
 
-    // Lấy tất cả chỉ số
-    public List<ChiSo> getAll() {
+    // Lấy toàn bộ chỉ số
+    public List<ChiSo> getAll() throws SQLException {
         List<ChiSo> list = new ArrayList<>();
-        String sql = "SELECT * FROM ChiSoDN";
+        String sql = "EXEC sp_XemChiSo";
         try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
-                list.add(new ChiSo(
-                        rs.getString("MaCS"),
+                ChiSo cs = new ChiSo(
+                        rs.getString("MaPhong"),
+                        rs.getInt("Thang"),
+                        rs.getInt("Nam"),
+                        rs.getInt("DienCu"),
+                        rs.getInt("DienMoi"),
+                        rs.getInt("NuocCu"),
+                        rs.getInt("NuocMoi"),
+                        rs.getInt("ChiSoDien"),
+                        rs.getInt("ChiSoNuoc")
+                );
+                list.add(cs);
+            }
+        }
+        return list;
+    }
+
+    // Thêm mới chỉ số điện nước
+    public boolean insert(ChiSo cs) throws SQLException {
+        String sql = "EXEC sp_ThemChiSo ?,?,?,?,?,?,?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cs.getMaPhong());
+            ps.setInt(2, cs.getThang());
+            ps.setInt(3, cs.getNam());
+            ps.setInt(4, cs.getDienCu());
+            ps.setInt(5, cs.getDienMoi());
+            ps.setInt(6, cs.getNuocCu());
+            ps.setInt(7, cs.getNuocMoi());
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    // Cập nhật chỉ số
+    public boolean update(ChiSo cs) throws SQLException {
+        String sql = "EXEC sp_SuaChiSo ?,?,?,?,?,?,?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cs.getMaPhong());
+            ps.setInt(2, cs.getThang());
+            ps.setInt(3, cs.getNam());
+            ps.setInt(4, cs.getDienCu());
+            ps.setInt(5, cs.getDienMoi());
+            ps.setInt(6, cs.getNuocCu());
+            ps.setInt(7, cs.getNuocMoi());
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    // Xóa chỉ số
+    public boolean delete(String maPhong, int thang, int nam) throws SQLException {
+        String sql = "EXEC sp_XoaChiSo ?,?,?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, maPhong);
+            ps.setInt(2, thang);
+            ps.setInt(3, nam);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    public ChiSo getByPhongThangNam(String maPhong, int thang, int nam) {
+    String sql = "SELECT MaPhong, Thang, Nam, ChiSoDien, ChiSoNuoc FROM ChiSoDN WHERE MaPhong=? AND Thang=? AND Nam=?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, maPhong);
+        ps.setInt(2, thang);
+        ps.setInt(3, nam);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return new ChiSo(
                         rs.getString("MaPhong"),
                         rs.getInt("Thang"),
                         rs.getInt("Nam"),
                         rs.getInt("ChiSoDien"),
                         rs.getInt("ChiSoNuoc")
-                ));
+                );
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return list;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return null;
+}
 
-    // Thêm
-    public boolean insert(ChiSo cs) {
-        String sql = "INSERT INTO ChiSoDN(MaCS,MaPhong,Thang,Nam,ChiSoDien,ChiSoNuoc) VALUES(?,?,?,?,?,?)";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, cs.getMaCS());
-            ps.setString(2, cs.getMaPhong());
-            ps.setInt(3, cs.getThang());
-            ps.setInt(4, cs.getNam());
-            ps.setInt(5, cs.getChiSoDien());
-            ps.setInt(6, cs.getChiSoNuoc());
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    // Cập nhật
-    public boolean update(ChiSo cs) {
-        String sql = "UPDATE ChiSoDN SET MaPhong=?, Thang=?, Nam=?, ChiSoDien=?, ChiSoNuoc=? WHERE MaCS=?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, cs.getMaPhong());
-            ps.setInt(2, cs.getThang());
-            ps.setInt(3, cs.getNam());
-            ps.setInt(4, cs.getChiSoDien());
-            ps.setInt(5, cs.getChiSoNuoc());
-            ps.setString(6, cs.getMaCS());
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // Xóa
-    public boolean delete(String maCS) {
-        String sql = "DELETE FROM ChiSoDN WHERE MaCS=?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, maCS);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 }

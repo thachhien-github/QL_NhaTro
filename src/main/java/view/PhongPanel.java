@@ -20,21 +20,75 @@ import util.DBConnection;
  */
 public class PhongPanel extends javax.swing.JPanel {
 
-    private DefaultTableModel tableModel;
     private PhongDAO phongDAO;
+    private DefaultTableModel tableModel;
 
     /**
      * Creates new form QuanLyDocGiaPanel
      */
     public PhongPanel() {
         initComponents();
+
         Connection conn = DBConnection.getConnection();
         phongDAO = new PhongDAO(conn);
-        
-        initTable();
-        loadData();
-        initCombobox();
 
+        initTable();
+        initCombobox();
+        loadData();
+    }
+
+    private void initTable() {
+        String[] cols = {"Mã phòng", "Tên phòng", "Loại phòng", "Giá thuê", "Tình trạng"};
+        tableModel = new DefaultTableModel(cols, 0);
+        tblQLphong.setModel(tableModel);
+    }
+
+    private void initCombobox() {
+        cboLoaiPhong.removeAllItems();
+        cboLoaiPhong.addItem("Thường");
+        cboLoaiPhong.addItem("VIP");
+        cboLoaiPhong.addItem("Đơn");
+        cboLoaiPhong.addItem("Đôi");
+
+        cboTinhTrang.removeAllItems();
+        cboTinhTrang.addItem("Trống");
+        cboTinhTrang.addItem("Đã thuê");
+        cboTinhTrang.addItem("Bảo trì");
+    }
+
+    private void loadData() {
+        tableModel.setRowCount(0);
+        List<Phong> list = phongDAO.getAll();
+        for (Phong p : list) {
+            tableModel.addRow(new Object[]{
+                p.getMaPhong(),
+                p.getTenPhong(),
+                p.getLoaiPhong(),
+                String.format("%,.0f đ", p.getGiaThue()), // định dạng giá thuê
+                p.getTinhTrang()
+            });
+        }
+
+    }
+
+    private void lamMoi() {
+        txtMaPhong.setText("");
+        txtTenPhong.setText("");
+        txtGiaThue.setText("");
+        cboLoaiPhong.setSelectedIndex(0);
+        cboTinhTrang.setSelectedIndex(0);
+        txtMaPhong.requestFocus();
+    }
+
+    private void fillFormFromTable() {
+        int row = tblQLphong.getSelectedRow();
+        if (row >= 0) {
+            txtMaPhong.setText(tableModel.getValueAt(row, 0).toString());
+            txtTenPhong.setText(tableModel.getValueAt(row, 1).toString());
+            cboLoaiPhong.setSelectedItem(tableModel.getValueAt(row, 2).toString());
+            txtGiaThue.setText(tableModel.getValueAt(row, 3).toString());
+            cboTinhTrang.setSelectedItem(tableModel.getValueAt(row, 4).toString());
+        }
     }
 
     /**
@@ -240,6 +294,11 @@ public class PhongPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if (txtMaPhong.getText().isEmpty() || txtTenPhong.getText().isEmpty() || txtGiaThue.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
+
         try {
             Phong p = new Phong(
                     txtMaPhong.getText(),
@@ -249,11 +308,11 @@ public class PhongPanel extends javax.swing.JPanel {
                     (String) cboTinhTrang.getSelectedItem()
             );
             if (phongDAO.insert(p)) {
-                JOptionPane.showMessageDialog(this, "Thêm phòng thành công!");
+                JOptionPane.showMessageDialog(this, "Thêm thành công!");
                 loadData();
                 lamMoi();
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm phòng thất bại!");
+                JOptionPane.showMessageDialog(this, "Thêm thất bại!");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi nhập liệu: " + ex.getMessage());
@@ -270,10 +329,10 @@ public class PhongPanel extends javax.swing.JPanel {
                     (String) cboTinhTrang.getSelectedItem()
             );
             if (phongDAO.update(p)) {
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                JOptionPane.showMessageDialog(this, "Sửa thành công!");
                 loadData();
             } else {
-                JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+                JOptionPane.showMessageDialog(this, "Sửa thất bại!");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi nhập liệu: " + ex.getMessage());
@@ -281,17 +340,17 @@ public class PhongPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        String maPhong = txtMaPhong.getText();
-        if (maPhong.isEmpty()) {
+        String ma = txtMaPhong.getText();
+        if (ma.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Mã phòng để xóa!");
             return;
         }
-        if (phongDAO.delete(maPhong)) {
-            JOptionPane.showMessageDialog(this, "Xóa phòng thành công!");
+        if (phongDAO.delete(ma)) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
             loadData();
             lamMoi();
         } else {
-            JOptionPane.showMessageDialog(this, "Xóa phòng thất bại!");
+            JOptionPane.showMessageDialog(this, "Xóa thất bại!");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -302,25 +361,16 @@ public class PhongPanel extends javax.swing.JPanel {
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String keyword = txtTenPhong.getText().trim();
         tableModel.setRowCount(0);
-        for (Phong p : phongDAO.getAll()) {
-            if (p.getTenPhong().toLowerCase().contains(keyword.toLowerCase())) {
-                tableModel.addRow(new Object[]{
-                    p.getMaPhong(), p.getTenPhong(), p.getLoaiPhong(),
-                    p.getGiaThue(), p.getTinhTrang()
-                });
-            }
+        List<Phong> list = phongDAO.searchByName(keyword);
+        for (Phong p : list) {
+            tableModel.addRow(new Object[]{
+                p.getMaPhong(), p.getTenPhong(), p.getLoaiPhong(), p.getGiaThue(), p.getTinhTrang()
+            });
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblQLphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLphongMouseClicked
-        int row = tblQLphong.getSelectedRow();
-        if (row >= 0) {
-            txtMaPhong.setText(tableModel.getValueAt(row, 0).toString());
-            txtTenPhong.setText(tableModel.getValueAt(row, 1).toString());
-            cboLoaiPhong.setSelectedItem(tableModel.getValueAt(row, 2).toString());
-            txtGiaThue.setText(tableModel.getValueAt(row, 3).toString());
-            cboTinhTrang.setSelectedItem(tableModel.getValueAt(row, 4).toString());
-        }
+        fillFormFromTable();
     }//GEN-LAST:event_tblQLphongMouseClicked
 
 
@@ -346,44 +396,5 @@ public class PhongPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaPhong;
     private javax.swing.JTextField txtTenPhong;
     // End of variables declaration//GEN-END:variables
-
-    private void initTable() {
-        String[] cols = {"Mã Phòng", "Tên Phòng", "Loại Phòng", "Giá Thuê", "Tình Trạng"};
-        tableModel = new DefaultTableModel(cols, 0);
-        tblQLphong.setModel(tableModel);
-    }
-
-    private void initCombobox() {
-        cboLoaiPhong.removeAllItems();
-        cboLoaiPhong.addItem("Thường");
-        cboLoaiPhong.addItem("VIP");
-        cboLoaiPhong.addItem("Đơn");
-        cboLoaiPhong.addItem("Đôi");
-
-        cboTinhTrang.removeAllItems();
-        cboTinhTrang.addItem("Trống");
-        cboTinhTrang.addItem("Đã thuê");
-        cboTinhTrang.addItem("Bảo trì");
-    }
-
-    void loadData() {
-        tableModel.setRowCount(0);
-        List<Phong> list = phongDAO.getAll();
-        for (Phong p : list) {
-            tableModel.addRow(new Object[]{
-                p.getMaPhong(), p.getTenPhong(), p.getLoaiPhong(),
-                p.getGiaThue(), p.getTinhTrang()
-            });
-        }
-    }
-
-    private void lamMoi() {
-        txtMaPhong.setText("");
-        txtTenPhong.setText("");
-        txtGiaThue.setText("");
-        cboLoaiPhong.setSelectedIndex(0);
-        cboTinhTrang.setSelectedIndex(0);
-        txtMaPhong.requestFocus();
-    }
 
 }
