@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class DBConnection {
-    static String url = "jdbc:sqlserver://THACHHIEN:1433;databaseName=QL_nhatro;encrypt=false";
+    static String url = "jdbc:sqlserver://localhost:1433;databaseName=QL_nhatro;encrypt=false";
     static String user = "sa";
     static String pass = "sa";
     
