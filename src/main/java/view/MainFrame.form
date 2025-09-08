@@ -223,7 +223,7 @@
                           <Component id="btnHopDong" alignment="1" pref="263" max="32767" attributes="0"/>
                           <Component id="btnPhong" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnXe" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnKhachHang" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnKhachThue" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnHoaDon" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnThongKe" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnChiSo" alignment="0" max="32767" attributes="0"/>
@@ -236,7 +236,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnKhachHang" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="btnKhachThue" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPhong" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -309,7 +309,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHopDongActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnKhachHang">
+            <Component class="javax.swing.JButton" name="btnKhachThue">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
@@ -320,11 +320,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/user_accounts_15362.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kh&#xe1;ch H&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="Kh&#xe1;ch Thu&#xea;"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachHangActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachThueActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnHoaDon">

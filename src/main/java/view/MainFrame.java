@@ -101,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnPhong = new javax.swing.JButton();
         btnXe = new javax.swing.JButton();
         btnHopDong = new javax.swing.JButton();
-        btnKhachHang = new javax.swing.JButton();
+        btnKhachThue = new javax.swing.JButton();
         btnHoaDon = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnChiSo = new javax.swing.JButton();
@@ -218,14 +218,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnKhachHang.setForeground(new java.awt.Color(0, 102, 204));
-        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user_accounts_15362.png"))); // NOI18N
-        btnKhachHang.setText("Khách Hàng");
-        btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+        btnKhachThue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnKhachThue.setForeground(new java.awt.Color(0, 102, 204));
+        btnKhachThue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user_accounts_15362.png"))); // NOI18N
+        btnKhachThue.setText("Khách Thuê");
+        btnKhachThue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnKhachThue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKhachHangActionPerformed(evt);
+                btnKhachThueActionPerformed(evt);
             }
         });
 
@@ -272,7 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(btnHopDong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                     .addComponent(btnPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKhachThue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnChiSo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -282,7 +282,7 @@ public class MainFrame extends javax.swing.JFrame {
             SideBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SideBarPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,9 +354,9 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+    private void btnKhachThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachThueActionPerformed
         cardLayout.show(MainPanel, "QL_KHACHTHUE");
-    }//GEN-LAST:event_btnKhachHangActionPerformed
+    }//GEN-LAST:event_btnKhachThueActionPerformed
 
     private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
         cardLayout.show(MainPanel, "QL_PHONG");
@@ -429,7 +429,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnChiSo;
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnHopDong;
-    private javax.swing.JButton btnKhachHang;
+    private javax.swing.JButton btnKhachThue;
     private javax.swing.JButton btnLOGO;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPhong;
