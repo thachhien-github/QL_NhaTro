@@ -53,7 +53,7 @@ Dự án xây dựng hệ thống quản lý nhà trọ cơ bản gồm các ch�
 ## 📌 Hướng dẫn cài đặt
 1. Clone repo về máy:
    ```bash
-   git clone https://github.com/thachhien-github/QL_NhaTro.git
+   https://github.com/thachhien-github/QL_NhaTro.git
    ```
 2. Mở dự án bằng **NetBeans** hoặc **IntelliJ**.
 3. Import database `QuanLyNhaTro.sql` trong thư mục `/database`.
