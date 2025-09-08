@@ -55,10 +55,10 @@ Dự án xây dựng hệ thống quản lý nhà trọ cơ bản gồm các ch�
    ```bash
    https://github.com/thachhien-github/QL_NhaTro.git
    ```
-2. Mở dự án bằng **NetBeans** hoặc **IntelliJ**.
+2. Mở dự án bằng **NetBeans**.
 3. Import database `QuanLyNhaTro.sql` trong thư mục `/database`.
 4. Chỉnh sửa file `DBConnection.java` cho phù hợp với cấu hình SQL Server trên máy.
-5. Chạy chương trình từ `MainFrame.java`.
+5. Chạy chương trình từ `LoginFrame.java`.
 
 ---
 
