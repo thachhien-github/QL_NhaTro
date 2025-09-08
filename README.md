@@ -69,6 +69,3 @@ Dự án xây dựng hệ thống quản lý nhà trọ cơ bản gồm các ch�
 - Tích hợp chức năng **refresh tự động** khi chuyển panel.
 
 ---
-
-## 📷 Preview giao diện
-Xem toàn bộ hình ảnh tại thư mục [`/images`](./images).
