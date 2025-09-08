@@ -485,7 +485,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
-        JOptionPane.showMessageDialog(this, "Chức năng in hóa đơn sẽ được bổ sung sau!");
+        JOptionPane.showMessageDialog(this, "Chức năng in hóa đơn sẽ được triển khai trong tương lai!");
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed

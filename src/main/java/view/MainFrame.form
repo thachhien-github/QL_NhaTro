@@ -126,6 +126,9 @@
                   <Image iconType="3" name="/img/Logout_37127.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnUser">
               <Properties>
@@ -133,6 +136,9 @@
                   <Image iconType="3" name="/img/account_avatar_face_man_people_profile_user_icon_123197.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUserActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnBell">
               <Properties>
@@ -140,6 +146,9 @@
                   <Image iconType="3" name="/img/ios7-bell_icon-icons.com_50334.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBellActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

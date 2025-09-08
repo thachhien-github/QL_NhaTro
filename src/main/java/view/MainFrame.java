@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,19 +38,19 @@ public class MainFrame extends javax.swing.JFrame {
         btnLOGO.setContentAreaFilled(false);
         btnLOGO.setFocusPainted(false);
         btnLOGO.setOpaque(false);
-        
+
         // Xóa viền, nền để logo phẳng
         btnLogout.setBorderPainted(false);
         btnLogout.setContentAreaFilled(false);
         btnLogout.setFocusPainted(false);
         btnLogout.setOpaque(false);
-        
+
         // Xóa viền, nền để logo phẳng
         btnUser.setBorderPainted(false);
         btnUser.setContentAreaFilled(false);
         btnUser.setFocusPainted(false);
         btnUser.setOpaque(false);
-        
+
         // Xóa viền, nền để logo phẳng
         btnBell.setBorderPainted(false);
         btnBell.setContentAreaFilled(false);
@@ -118,10 +119,25 @@ public class MainFrame extends javax.swing.JFrame {
         TopPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Logout_37127.png"))); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/account_avatar_face_man_people_profile_user_icon_123197.png"))); // NOI18N
+        btnUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserActionPerformed(evt);
+            }
+        });
 
         btnBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ios7-bell_icon-icons.com_50334.png"))); // NOI18N
+        btnBell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBellActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
@@ -386,6 +402,30 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardLayout.show(MainPanel, "HOME");
     }//GEN-LAST:event_btnLOGOActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận đăng xuất",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            this.dispose(); // Đóng MainFrame hiện tại
+
+            // Mở lại LoginFrame
+            java.awt.EventQueue.invokeLater(() -> {
+                new LoginFrame().setVisible(true);
+            });
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnBellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBellActionPerformed
+        JOptionPane.showMessageDialog(this, "Chức năng thông báo sẽ được triển khai trong tương lai!");
+    }//GEN-LAST:event_btnBellActionPerformed
+
+    private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
+        JOptionPane.showMessageDialog(this, "Chức năng Account sẽ được triển khai trong tương lai!");
+    }//GEN-LAST:event_btnUserActionPerformed
 
     /**
      * @param args the command line arguments
