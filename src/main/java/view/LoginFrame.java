@@ -7,6 +7,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -28,6 +29,10 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        getRootPane().setDefaultButton(btnDangNhap);
+        btnClose.setMnemonic(KeyEvent.VK_C);
+
+
 
         // --- Bo tròn JFrame ---
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
@@ -226,12 +231,9 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(LoginPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LoginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(LoginPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

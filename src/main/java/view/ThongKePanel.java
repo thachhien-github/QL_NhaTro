@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package view;
 
 import java.sql.Connection;
@@ -13,12 +9,9 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.DBConnection;
+import util.RefreshablePanel;
 
-/**
- *
- * @author ADMIN
- */
-public class ThongKePanel extends javax.swing.JPanel {
+public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel {
 
     private Connection conn;
     private DefaultTableModel tableModel;
@@ -181,6 +174,11 @@ public class ThongKePanel extends javax.swing.JPanel {
         } catch (Exception e) {
             // bỏ qua nếu chưa chọn đủ combo
         }
+    }
+
+    @Override
+    public void refreshData() {
+        autoLoadData();  // hoặc gọi loadData(0, năm, true) nếu muốn refresh mặc định
     }
 
     @SuppressWarnings("unchecked")

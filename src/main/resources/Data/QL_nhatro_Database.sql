@@ -190,15 +190,44 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE sp_XoaKhach
+CREATE OR ALTER PROCEDURE sp_XoaKhach
     @MaKT VARCHAR(10)
 AS
 BEGIN
-    DELETE FROM Xe WHERE MaKT=@MaKT;
-    DELETE FROM HopDong WHERE MaKT=@MaKT;
-    DELETE FROM KhachThue WHERE MaKT=@MaKT;
+    SET NOCOUNT ON;
+
+    DECLARE @MaPhong VARCHAR(10);
+
+    -- Lấy mã phòng từ hợp đồng của khách thuê
+    SELECT TOP 1 @MaPhong = MaPhong
+    FROM HopDong
+    WHERE MaKT = @MaKT;
+
+    -- Xóa xe
+    DELETE FROM Xe WHERE MaKT = @MaKT;
+
+    -- Xóa hóa đơn (theo phòng)
+    IF @MaPhong IS NOT NULL
+    BEGIN
+        DELETE FROM HoaDon WHERE MaPhong = @MaPhong;
+    END
+
+    -- Xóa hợp đồng
+    DELETE FROM HopDong WHERE MaKT = @MaKT;
+
+    -- Xóa khách thuê
+    DELETE FROM KhachThue WHERE MaKT = @MaKT;
+
+    -- Cập nhật trạng thái phòng về Trống
+    IF @MaPhong IS NOT NULL
+    BEGIN
+        UPDATE Phong SET TinhTrang = N'Trống'
+        WHERE MaPhong = @MaPhong;
+    END
 END;
 GO
+
+
 
 CREATE PROCEDURE sp_XemKhach
 AS
@@ -353,38 +382,6 @@ SELECT
     (hd.TienPhong + hd.TienDien + hd.TienNuoc + hd.TienXe) AS TongTien
 FROM HoaDon hd
 INNER JOIN Phong p ON hd.MaPhong = p.MaPhong;
-GO
-
-
-------------------------------------------------------------
--- STORED PROCEDURE IN HÓA ĐƠN CHI TIẾT
-------------------------------------------------------------
-CREATE PROCEDURE sp_InHoaDon
-    @MaHDon VARCHAR(10)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT 
-        hd.MaHDon,
-        hd.Thang,
-        hd.Nam,
-        kt.HoTen       AS TenKhach,
-        kt.SDT,
-        kt.DiaChi,
-        p.TenPhong,
-        p.LoaiPhong,
-        hd.TienPhong,
-        hd.TienDien,
-        hd.TienNuoc,
-        hd.TienXe,
-        (hd.TienPhong + hd.TienDien + hd.TienNuoc + hd.TienXe) AS TongTien
-    FROM HoaDon hd
-    JOIN Phong p      ON hd.MaPhong = p.MaPhong
-    JOIN HopDong h    ON hd.MaPhong = h.MaPhong
-    JOIN KhachThue kt ON h.MaKT     = kt.MaKT
-    WHERE hd.MaHDon = @MaHDon;
-END;
 GO
 
 CREATE OR ALTER PROCEDURE sp_TaoHoaDonTuDong

@@ -195,6 +195,9 @@
                   <Border info="null"/>
                 </Property>
                 <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnKhachThue"/>
+                </Property>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
               <Events>
@@ -277,6 +280,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ph&#xf2;ng"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnHopDong"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPhongActionPerformed"/>
@@ -295,6 +301,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Xe"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnChiSo"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXeActionPerformed"/>
@@ -313,6 +322,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#x1ee3;p &#x110;&#x1ed3;ng"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnXe"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHopDongActionPerformed"/>
@@ -331,6 +343,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Kh&#xe1;ch Thu&#xea;"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnPhong"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachThueActionPerformed"/>
@@ -349,6 +364,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="H&#xf3;a &#x110;&#x1a1;n"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnThongKe"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHoaDonActionPerformed"/>
@@ -367,6 +385,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng K&#xea;"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnLOGO"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThongKeActionPerformed"/>
@@ -385,6 +406,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ec9; S&#x1ed1; &#x110;i&#x1ec7;n N&#x1b0;&#x1edb;c"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnHoaDon"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiSoActionPerformed"/>

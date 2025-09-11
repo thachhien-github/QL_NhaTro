@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,8 +30,7 @@ public class KhachThueDAO {
     public List<KhachThue> getAll() {
         List<KhachThue> list = new ArrayList<>();
         String sql = "SELECT * FROM KhachThue";
-        try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+        try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new KhachThue(
                         rs.getString("MaKT"),
@@ -51,8 +51,8 @@ public class KhachThueDAO {
 
     // Thêm khách thuê
     public boolean insert(KhachThue kt) {
-        String sql = "INSERT INTO KhachThue(MaKT,HoTen,GioiTinh,NgaySinh,CCCD,SDT,DiaChi,MaPhong) " +
-                     "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO KhachThue(MaKT,HoTen,GioiTinh,NgaySinh,CCCD,SDT,DiaChi,MaPhong) "
+                + "VALUES (?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, kt.getMaKT());
             ps.setString(2, kt.getHoTen());
@@ -71,8 +71,8 @@ public class KhachThueDAO {
 
     // Cập nhật khách thuê
     public boolean update(KhachThue kt) {
-        String sql = "UPDATE KhachThue SET HoTen=?, GioiTinh=?, NgaySinh=?, CCCD=?, SDT=?, DiaChi=?, MaPhong=? " +
-                     "WHERE MaKT=?";
+        String sql = "UPDATE KhachThue SET HoTen=?, GioiTinh=?, NgaySinh=?, CCCD=?, SDT=?, DiaChi=?, MaPhong=? "
+                + "WHERE MaKT=?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, kt.getHoTen());
             ps.setString(2, kt.getGioiTinh());
@@ -90,11 +90,12 @@ public class KhachThueDAO {
     }
 
     // Xóa khách thuê
-    public boolean delete(String maKH) {
-        String sql = "DELETE FROM KhachThue WHERE MaKH=?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, maKH);
-            return ps.executeUpdate() > 0;
+    public boolean delete(String maKT) {
+        String sql = "{call sp_XoaKhach(?)}";
+        try (CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, maKT);
+            cs.execute(); // sp có nhiều DELETE -> executeUpdate() thường trả -1
+            return true;  // nếu chạy tới đây coi như thành công
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

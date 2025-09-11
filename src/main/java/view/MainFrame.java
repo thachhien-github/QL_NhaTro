@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import java.awt.BorderLayout;
@@ -182,6 +178,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOGO_01N.png"))); // NOI18N
         btnLOGO.setBorder(null);
         btnLOGO.setBorderPainted(false);
+        btnLOGO.setNextFocusableComponent(btnKhachThue);
         btnLOGO.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnLOGO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1490886282-18-school-building_82486.png"))); // NOI18N
         btnPhong.setText("Phòng");
         btnPhong.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPhong.setNextFocusableComponent(btnHopDong);
         btnPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPhongActionPerformed(evt);
@@ -228,6 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnXe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1452632162_inspiration-34_icon-icons.com_51105.png"))); // NOI18N
         btnXe.setText("Xe");
         btnXe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnXe.setNextFocusableComponent(btnChiSo);
         btnXe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXeActionPerformed(evt);
@@ -239,6 +238,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnHopDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/contract_icon_194172.png"))); // NOI18N
         btnHopDong.setText("Hợp Đồng");
         btnHopDong.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnHopDong.setNextFocusableComponent(btnXe);
         btnHopDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHopDongActionPerformed(evt);
@@ -250,6 +250,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnKhachThue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user_accounts_15362.png"))); // NOI18N
         btnKhachThue.setText("Khách Thuê");
         btnKhachThue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnKhachThue.setNextFocusableComponent(btnPhong);
         btnKhachThue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKhachThueActionPerformed(evt);
@@ -261,6 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pay_cash_payment_money_dollar_bill_icon_143267.png"))); // NOI18N
         btnHoaDon.setText("Hóa Đơn");
         btnHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnHoaDon.setNextFocusableComponent(btnThongKe);
         btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHoaDonActionPerformed(evt);
@@ -272,6 +274,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/marketing_strategy_finance_chart_laptop_management_business_icon_263043.png"))); // NOI18N
         btnThongKe.setText("Thống Kê");
         btnThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThongKe.setNextFocusableComponent(btnLOGO);
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThongKeActionPerformed(evt);
@@ -283,6 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnChiSo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/4014672-bill-contract-cost-document-mobile-receipt-service_112892.png"))); // NOI18N
         btnChiSo.setText("Chỉ Số Điện Nước");
         btnChiSo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnChiSo.setNextFocusableComponent(btnHoaDon);
         btnChiSo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChiSoActionPerformed(evt);

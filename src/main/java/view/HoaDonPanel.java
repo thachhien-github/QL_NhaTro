@@ -71,7 +71,7 @@ public class HoaDonPanel extends javax.swing.JPanel implements RefreshablePanel 
                 String.format("%,.0f đ", hd.getTongTien())
             });
         }
-
+        clearForm();
     }
 
     // ===== Load dữ liệu cho Combobox =====
@@ -241,6 +241,7 @@ public class HoaDonPanel extends javax.swing.JPanel implements RefreshablePanel 
         cboMaPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboThang.setNextFocusableComponent(cboNam);
 
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 

@@ -173,6 +173,7 @@ public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
         jLabel11.setText("Tháng");
 
         btnThem.setText("Thêm");
+        btnThem.setNextFocusableComponent(btnSua);
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
@@ -180,6 +181,7 @@ public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
         });
 
         btnSua.setText("Sửa ");
+        btnSua.setNextFocusableComponent(btnXoa);
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -187,6 +189,7 @@ public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.setNextFocusableComponent(btnLamMoi);
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -194,6 +197,7 @@ public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
         });
 
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.setNextFocusableComponent(cboThang);
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
@@ -201,14 +205,25 @@ public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
         });
 
         cboMaPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMaPhong.setNextFocusableComponent(txtDienCu);
 
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboThang.setNextFocusableComponent(cboNam);
 
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNam.setNextFocusableComponent(cboMaPhong);
+
+        txtDienMoi.setNextFocusableComponent(txtNuocCu);
 
         jLabel17.setText("Chỉ số điện mới ");
 
+        txtDienCu.setNextFocusableComponent(txtDienMoi);
+
         jLabel19.setText("Chỉ số nước mới ");
+
+        txtNuocCu.setNextFocusableComponent(txtNuocMoi);
+
+        txtNuocMoi.setNextFocusableComponent(btnThem);
 
         jLabel21.setText("Chỉ số điện cũ");
 
