@@ -7,6 +7,7 @@ package view;
 import dao.ChiSoDAO;
 import dao.HoaDonDAO;
 import dao.PhongDAO;
+import dao.XeDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -14,16 +15,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ADMIN
  */
-public class HoaDonPanel extends javax.swing.JPanel {
+public class HoaDonPanel extends javax.swing.JPanel implements RefreshablePanel {
 
     private HoaDonDAO hoaDonDAO = new HoaDonDAO();
     private PhongDAO phongDAO = new PhongDAO();
     private ChiSoDAO chiSoDAO = new ChiSoDAO();
+    private XeDAO xeDAO = new XeDAO();
+
 
     private DefaultTableModel tableModel;
 
@@ -31,7 +35,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
         initComponents();
         initTable();
         loadComboBox();  // phải load trước
-        loadData();       // mới load dữ liệu bảng
+        refreshData();       // mới load dữ liệu bảng
         clearForm();
 
         cboMaPhong.addActionListener(e -> loadChiSoAndTinhTien());
@@ -50,7 +54,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }
 
     // ===== Load dữ liệu JTable =====
-    private void loadData() {
+    @Override
+    public void refreshData() {
         tableModel.setRowCount(0);
         List<HoaDon> list = hoaDonDAO.getAll();
         for (HoaDon hd : list) {
@@ -138,21 +143,14 @@ public class HoaDonPanel extends javax.swing.JPanel {
                 double tienPhong = phongDAO.getTienPhongTheoMa(maPhong);
                 txtTienPhong.setText(String.valueOf(tienPhong));
 
-                double tienXe = phongDAO.getPhiGiuXeTheoMaPhong(maPhong); // viết thêm DAO nếu có bảng xe
+                double tienXe = new dao.XeDAO().tinhTienXeTheoPhong(maPhong);
                 txtTienXe.setText(String.valueOf(tienXe));
 
                 // --- Tổng cộng ---
                 double tong = tienPhong + tienDien + tienNuoc + tienXe;
                 txtTongTien.setText(String.valueOf(tong));
             } else {
-                // Không có chỉ số => clear field
-                txtCSdien.setText("");
-                txtKhoiNuoc.setText("");
-                txtTienDien.setText("");
-                txtTienNuoc.setText("");
-                txtTienPhong.setText("");
-                txtTienXe.setText("");
-                txtTongTien.setText("");
+                clearForm();
                 JOptionPane.showMessageDialog(this, "Chưa có chỉ số cho "
                         + maPhong + " tháng " + thang + "/" + nam);
             }
@@ -465,7 +463,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         clearForm();
-        loadData();
+        refreshData();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -474,7 +472,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
             String maHDon = tableModel.getValueAt(row, 0).toString();
             if (hoaDonDAO.delete(maHDon)) {
                 JOptionPane.showMessageDialog(this, "Xóa hóa đơn thành công!");
-                loadData();
+                refreshData();
                 clearForm();
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại!");
@@ -499,11 +497,12 @@ public class HoaDonPanel extends javax.swing.JPanel {
             double tienNuoc = Double.parseDouble(txtTienNuoc.getText());
             double tienXe = Double.parseDouble(txtTienXe.getText());
 
-            HoaDon hd = new HoaDon(null, maPhong, thang, nam, tienPhong, tienDien, tienNuoc, tienXe, 0);
+            HoaDon hd = new HoaDon(null, maPhong, thang, nam,
+                    tienPhong, tienDien, tienNuoc, tienXe, 0);
 
             if (hoaDonDAO.insert(hd)) {
                 JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công!");
-                loadData();
+                refreshData();
                 clearForm();
             } else {
                 JOptionPane.showMessageDialog(this, "Tạo hóa đơn thất bại!");

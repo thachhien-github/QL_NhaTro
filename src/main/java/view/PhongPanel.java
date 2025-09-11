@@ -13,12 +13,13 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Phong;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ADMIN
  */
-public class PhongPanel extends javax.swing.JPanel {
+public class PhongPanel extends javax.swing.JPanel implements RefreshablePanel{
 
     private PhongDAO phongDAO;
     private DefaultTableModel tableModel;
@@ -34,7 +35,7 @@ public class PhongPanel extends javax.swing.JPanel {
 
         initTable();
         initCombobox();
-        loadData();
+        refreshData();
     }
 
     private void initTable() {
@@ -56,7 +57,8 @@ public class PhongPanel extends javax.swing.JPanel {
         cboTinhTrang.addItem("Bảo trì");
     }
 
-    private void loadData() {
+    @Override
+    public void refreshData() {
         tableModel.setRowCount(0);
         List<Phong> list = phongDAO.getAll();
         for (Phong p : list) {
@@ -309,7 +311,7 @@ public class PhongPanel extends javax.swing.JPanel {
             );
             if (phongDAO.insert(p)) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                loadData();
+                refreshData();
                 lamMoi();
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại!");
@@ -330,7 +332,7 @@ public class PhongPanel extends javax.swing.JPanel {
             );
             if (phongDAO.update(p)) {
                 JOptionPane.showMessageDialog(this, "Sửa thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại!");
             }
@@ -347,7 +349,7 @@ public class PhongPanel extends javax.swing.JPanel {
         }
         if (phongDAO.delete(ma)) {
             JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            loadData();
+            refreshData();
             lamMoi();
         } else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại!");

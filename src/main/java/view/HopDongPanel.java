@@ -18,12 +18,13 @@ import model.HopDong;
 import model.KhachThue;
 import model.Phong;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ADMIN
  */
-public class HopDongPanel extends javax.swing.JPanel {
+public class HopDongPanel extends javax.swing.JPanel implements RefreshablePanel {
     // ===== Khai báo DAO =====
 
     private HopDongDAO hopDongDAO;
@@ -41,12 +42,13 @@ public class HopDongPanel extends javax.swing.JPanel {
         phongDAO = new PhongDAO(conn);
         khachThueDAO = new KhachThueDAO(conn);
 
-        loadData();
-        loadComboBox();
+        refreshData();
     }
 
     // ===== Load dữ liệu bảng =====
-    private void loadData() {
+    @Override
+    public void refreshData() {
+        // Load bảng hợp đồng
         List<HopDong> list = hopDongDAO.getAll();
         String[] cols = {"Mã HĐ", "Mã khách", "Mã phòng", "Ngày BĐ", "Ngày KT"};
         modelHD = new DefaultTableModel(cols, 0);
@@ -63,6 +65,9 @@ public class HopDongPanel extends javax.swing.JPanel {
             });
         }
         tblHopDong.setModel(modelHD);
+
+        // Load lại combobox mỗi lần refresh
+        loadComboBox();
     }
 
 // ===== Load dữ liệu combobox =====
@@ -294,7 +299,7 @@ public class HopDongPanel extends javax.swing.JPanel {
             );
             if (hopDongDAO.insert(hd)) {
                 JOptionPane.showMessageDialog(this, "Thêm hợp đồng thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Không thể thêm hợp đồng!");
             }
@@ -315,7 +320,7 @@ public class HopDongPanel extends javax.swing.JPanel {
             );
             if (hopDongDAO.update(hd)) {
                 JOptionPane.showMessageDialog(this, "Sửa hợp đồng thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Không thể sửa hợp đồng!");
             }
@@ -332,7 +337,7 @@ public class HopDongPanel extends javax.swing.JPanel {
             String maPhong = modelHD.getValueAt(row, 2).toString();
             if (hopDongDAO.delete(maHD, maPhong)) {
                 JOptionPane.showMessageDialog(this, "Xóa hợp đồng thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Không thể xóa hợp đồng!");
             }
@@ -351,7 +356,7 @@ public class HopDongPanel extends javax.swing.JPanel {
         if (cboMaPhong.getItemCount() > 0) {
             cboMaPhong.setSelectedIndex(0);
         }
-        loadData();
+        refreshData();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import util.RefreshablePanel;
 
 /**
  *
@@ -79,6 +80,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         // Hiển thị mặc định (ví dụ logo hay panel đầu tiên)
         cardLayout.show(MainPanel, "HOME"); // mở mặc định
+    }
+
+    private void showPanel(String name) {
+        cardLayout.show(MainPanel, name);
+
+        for (java.awt.Component comp : MainPanel.getComponents()) {
+            if (comp.isVisible() && comp instanceof RefreshablePanel) {
+                ((RefreshablePanel) comp).refreshData();
+            }
+        }
     }
 
     /**
@@ -371,36 +382,35 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKhachThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachThueActionPerformed
-        cardLayout.show(MainPanel, "QL_KHACHTHUE");
+        showPanel("QL_KHACHTHUE");
     }//GEN-LAST:event_btnKhachThueActionPerformed
 
     private void btnPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhongActionPerformed
-        cardLayout.show(MainPanel, "QL_PHONG");
+        showPanel("QL_PHONG");
     }//GEN-LAST:event_btnPhongActionPerformed
 
     private void btnXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXeActionPerformed
-        cardLayout.show(MainPanel, "QL_XE");
+        showPanel("QL_XE");
     }//GEN-LAST:event_btnXeActionPerformed
 
     private void btnHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHopDongActionPerformed
-        cardLayout.show(MainPanel, "QL_HOPDONG");
+        showPanel("QL_HOPDONG");
     }//GEN-LAST:event_btnHopDongActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
-        cardLayout.show(MainPanel, "QL_HOADON");
+        showPanel("QL_HOADON");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        cardLayout.show(MainPanel, "THONGKE");
+        showPanel("THONGKE");
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnChiSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiSoActionPerformed
-        cardLayout.show(MainPanel, "CHISO");
+        showPanel("CHISO");
     }//GEN-LAST:event_btnChiSoActionPerformed
 
     private void btnLOGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLOGOActionPerformed
-        // TODO add your handling code here:
-        cardLayout.show(MainPanel, "HOME");
+       showPanel("HOME");
     }//GEN-LAST:event_btnLOGOActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

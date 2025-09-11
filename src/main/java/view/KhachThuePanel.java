@@ -11,12 +11,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhachThue;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ADMIN
  */
-public class KhachThuePanel extends javax.swing.JPanel {
+public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePanel{
 
     // Khai báo DAO
     private KhachThueDAO khachThueDAO;
@@ -26,7 +27,7 @@ public class KhachThuePanel extends javax.swing.JPanel {
     public KhachThuePanel(PhongPanel phongPanel) {
         initComponents();
         initData();
-        loadData();
+        refreshData();
     }
 
     private void initData() {
@@ -40,10 +41,11 @@ public class KhachThuePanel extends javax.swing.JPanel {
         }, 0);
         tblKhachHang.setModel(model);
 
-        loadData();
+        refreshData();
     }
 
-    private void loadData() {
+    @Override
+    public void refreshData() {
         model.setRowCount(0);
         List<KhachThue> list = khachThueDAO.getAll();
         for (KhachThue kt : list) {
@@ -324,7 +326,7 @@ public class KhachThuePanel extends javax.swing.JPanel {
                 // cập nhật trạng thái phòng
                 phongDAO.updateTrangThai(maPhong, "Đã thuê");
                 JOptionPane.showMessageDialog(this, "Thêm khách thuê thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm khách thuê thất bại!");
             }
@@ -355,7 +357,7 @@ public class KhachThuePanel extends javax.swing.JPanel {
 
             if (khachThueDAO.update(kt)) {
                 JOptionPane.showMessageDialog(this, "Sửa thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại!");
             }
@@ -378,7 +380,7 @@ public class KhachThuePanel extends javax.swing.JPanel {
                 // cập nhật phòng về Trống
                 phongDAO.updateTrangThai(maPhong, "Trống");
                 JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                loadData();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại!");
             }
@@ -396,7 +398,7 @@ public class KhachThuePanel extends javax.swing.JPanel {
         txtMaPhong.setText("");
         buttonGroup1.clearSelection();
         dtpNgaySinh.setDate(null);
-        loadData();
+        refreshData();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed

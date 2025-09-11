@@ -25,6 +25,9 @@ public class XeDAO {
         this.conn = conn;
     }
 
+    public XeDAO() {
+    }
+
     // Lấy toàn bộ danh sách xe
     public List<Xe> getAllXe() throws SQLException {
         List<Xe> list = new ArrayList<>();
@@ -79,6 +82,27 @@ public class XeDAO {
         }
     }
 
-    
+    // Tính tổng phí gửi xe theo mã phòng
+    public double tinhTienXeTheoPhong(String maPhong) {
+        double tongTien = 0;
+        String sql = "SELECT SUM(x.PhiGiuXe) AS TongTienXe "
+                + "FROM Xe x "
+                + "JOIN KhachThue kt ON x.MaKT = kt.MaKT "
+                + "WHERE kt.MaPhong = ?";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, maPhong);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    tongTien = rs.getDouble("TongTienXe");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tongTien;
+    }
 
 }

@@ -617,17 +617,7 @@ public class ThongKePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        try {
-            int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
-            boolean theoNam = chkTheoNam.isSelected();
-            int thang = 0;
-            if (!theoNam) {
-                thang = Integer.parseInt(cboThang.getSelectedItem().toString());
-            }
-            loadData(thang, nam, theoNam);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn tháng/năm hợp lệ!");
-        }
+        autoLoadData();
     }//GEN-LAST:event_btnThongKeActionPerformed
 
 

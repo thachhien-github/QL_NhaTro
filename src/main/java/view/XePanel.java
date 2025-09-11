@@ -12,12 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Xe;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ADMIN
  */
-public class XePanel extends javax.swing.JPanel {
+public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
 
     private DefaultTableModel model;
     private XeDAO xeDAO;
@@ -60,10 +61,11 @@ public class XePanel extends javax.swing.JPanel {
             }
         });
 
-        loadData();
+        refreshData();
     }
 
-    private void loadData() {
+    @Override
+    public void refreshData() {
         try {
             model.setRowCount(0);
             List<Xe> list = xeDAO.getAllXe();
@@ -314,7 +316,7 @@ public class XePanel extends javax.swing.JPanel {
             );
             if (xeDAO.insertXe(xe)) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                loadData();
+                refreshData();
                 lamMoi();
             }
         } catch (Exception ex) {
@@ -333,7 +335,7 @@ public class XePanel extends javax.swing.JPanel {
             );
             if (xeDAO.updateXe(xe)) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-                loadData();
+                refreshData();
                 lamMoi();
             }
         } catch (Exception ex) {
@@ -346,7 +348,7 @@ public class XePanel extends javax.swing.JPanel {
             String maXe = txtMaXe.getText();
             if (xeDAO.deleteXe(maXe)) {
                 JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                loadData();
+                refreshData();
                 lamMoi();
             }
         } catch (Exception ex) {

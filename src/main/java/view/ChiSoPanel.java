@@ -17,12 +17,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ChiSo;
 import util.DBConnection;
+import util.RefreshablePanel;
 
 /**
  *
  * @author ThachHien
  */
-public class ChiSoPanel extends javax.swing.JPanel {
+public class ChiSoPanel extends javax.swing.JPanel implements RefreshablePanel {
 
     private ChiSoDAO chiSoDAO;
     private PhongDAO phongDAO;
@@ -31,14 +32,14 @@ public class ChiSoPanel extends javax.swing.JPanel {
         initComponents();
 
         Connection conn = DBConnection.getConnection();
-        chiSoDAO = new ChiSoDAO(conn, null);   // ✅ truyền connection
-        phongDAO = new PhongDAO(conn);   // giả sử PhongDAO cũng nhận conn
+        chiSoDAO = new ChiSoDAO(conn, null);
+        phongDAO = new PhongDAO(conn);
 
         loadComboBoxPhong();
         loadComboBoxThangNam();
-        loadTable();
+        refreshData();
 
-        // Tự động tính chỉ số khi nhập chỉ số mới
+        // Tự động tính chỉ số khi nhập
         txtDienMoi.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
                 tinhChiSoDien();
@@ -65,13 +66,15 @@ public class ChiSoPanel extends javax.swing.JPanel {
         for (int i = 1; i <= 12; i++) {
             cboThang.addItem(String.valueOf(i));
         }
+
         cboNam.removeAllItems();
         for (int y = 2020; y <= 2030; y++) {
             cboNam.addItem(String.valueOf(y));
         }
     }
 
-    private void loadTable() {
+    @Override
+    public void refreshData() {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new String[]{
             "Mã phòng", "Tháng", "Năm",
@@ -388,7 +391,7 @@ public class ChiSoPanel extends javax.swing.JPanel {
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         resetForm();
-        loadTable();
+        refreshData();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -408,7 +411,7 @@ public class ChiSoPanel extends javax.swing.JPanel {
                     ps.setInt(3, nam);
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                    loadTable();
+                    refreshData();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Lỗi xóa: " + e.getMessage());
                 }
@@ -444,7 +447,7 @@ public class ChiSoPanel extends javax.swing.JPanel {
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-            loadTable();
+            refreshData();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi sửa: " + e.getMessage());
         }
@@ -466,7 +469,7 @@ public class ChiSoPanel extends javax.swing.JPanel {
 
             if (chiSoDAO.insert(cs)) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công!");
-                loadTable();
+                refreshData();
             } else {
                 JOptionPane.showMessageDialog(this, "Không thể thêm!");
             }
