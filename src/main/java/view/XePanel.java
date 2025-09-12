@@ -18,7 +18,7 @@ import util.RefreshablePanel;
  *
  * @author ADMIN
  */
-public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
+public class XePanel extends javax.swing.JPanel implements RefreshablePanel {
 
     private DefaultTableModel model;
     private XeDAO xeDAO;
@@ -47,17 +47,19 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
 
         // Sự kiện thay đổi loại xe
         cboLoaiXe.addActionListener(e -> {
-            String loai = cboLoaiXe.getSelectedItem().toString();
-            switch (loai) {
-                case "Xe số":
-                    txtPhiGiuXe.setText("100000");
-                    break;
-                case "Xe tay ga":
-                    txtPhiGiuXe.setText("120000");
-                    break;
-                case "Xe đạp":
-                    txtPhiGiuXe.setText("50000");
-                    break;
+            if (txtMaXe.getText().isEmpty()) { // chỉ khi thêm mới (Mã xe rỗng)
+                String loai = (String) cboLoaiXe.getSelectedItem();
+                switch (loai) {
+                    case "Xe số":
+                        txtPhiGiuXe.setText("100000");
+                        break;
+                    case "Xe tay ga":
+                        txtPhiGiuXe.setText("120000");
+                        break;
+                    case "Xe đạp":
+                        txtPhiGiuXe.setText("50000");
+                        break;
+                }
             }
         });
 
@@ -85,11 +87,27 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
     }
 
     private void lamMoi() {
+        // Reset các ô nhập
         txtMaXe.setText("");
         txtMaKhachThue.setText("");
         txtBienSo.setText("");
-        cboLoaiXe.setSelectedIndex(0); // mặc định Xe số
-        txtPhiGiuXe.setText("100000"); // giá theo Xe số
+
+        // Reset loại xe về mặc định
+        cboLoaiXe.setSelectedIndex(0); // mặc định "Xe số"
+
+        // Load giá mặc định theo loại xe (chỉ khi thêm mới)
+        String loai = (String) cboLoaiXe.getSelectedItem();
+        switch (loai) {
+            case "Xe số":
+                txtPhiGiuXe.setText("100000");
+                break;
+            case "Xe tay ga":
+                txtPhiGiuXe.setText("120000");
+                break;
+            case "Xe đạp":
+                txtPhiGiuXe.setText("50000");
+                break;
+        }
     }
 
     /**
@@ -189,6 +207,8 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
 
         cboLoaiXe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        txtPhiGiuXe.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -212,14 +232,14 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel{
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                                .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtMaXe, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtBienSo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtMaKhachThue, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

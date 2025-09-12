@@ -82,8 +82,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="chkTheoNam" min="-2" pref="83" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="chkTheoNam" min="-2" pref="89" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnThongKe" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel7" max="32767" attributes="0"/>

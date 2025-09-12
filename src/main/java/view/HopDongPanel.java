@@ -60,8 +60,8 @@ public class HopDongPanel extends javax.swing.JPanel implements RefreshablePanel
                 hd.getMaHD(),
                 hd.getMaKT(),
                 hd.getMaPhong(),
-                hd.getNgayBatDau() != null ? sdf.format(hd.getNgayBatDau()) : "",
-                hd.getNgayKetThuc() != null ? sdf.format(hd.getNgayKetThuc()) : ""
+                hd.getNgayBatDau(),
+                hd.getNgayKetThuc()
             });
         }
         tblHopDong.setModel(modelHD);
@@ -194,10 +194,10 @@ public class HopDongPanel extends javax.swing.JPanel implements RefreshablePanel
                             .addComponent(cboMaKT, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cboMaPhong, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(dtpNgayKT, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                             .addComponent(dtpNgayBD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -276,12 +276,22 @@ public class HopDongPanel extends javax.swing.JPanel implements RefreshablePanel
     private void tblHopDongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHopDongMouseClicked
         int row = tblHopDong.getSelectedRow();
         if (row >= 0) {
+            // Gán giá trị cho các trường
             txtMaHD.setText(modelHD.getValueAt(row, 0).toString());
             cboMaKT.setSelectedItem(modelHD.getValueAt(row, 1).toString());
             cboMaPhong.setSelectedItem(modelHD.getValueAt(row, 2).toString());
-            dtpNgayBD.setDate(Date.valueOf(modelHD.getValueAt(row, 3).toString()));
-            if (modelHD.getValueAt(row, 4) != null) {
-                dtpNgayKT.setDate(Date.valueOf(modelHD.getValueAt(row, 4).toString()));
+
+            // Lấy ngày từ model (java.util.Date) và gán cho JDateChooser
+            Object ngayBDObj = modelHD.getValueAt(row, 3);
+            if (ngayBDObj != null) {
+                dtpNgayBD.setDate((java.util.Date) ngayBDObj);
+            } else {
+                dtpNgayBD.setDate(null);
+            }
+
+            Object ngayKTObj = modelHD.getValueAt(row, 4);
+            if (ngayKTObj != null) {
+                dtpNgayKT.setDate((java.util.Date) ngayKTObj);
             } else {
                 dtpNgayKT.setDate(null);
             }
