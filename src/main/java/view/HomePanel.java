@@ -27,13 +27,13 @@ public class HomePanel extends javax.swing.JPanel {
     public HomePanel() {
         initComponents();
         // Logo
-        ImageIcon logoIcon = new ImageIcon(getClass().getResource("/img/LOGO_01L.png"));
-        Image scaledImg = logoIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon logoIcon = new ImageIcon(getClass().getResource("/img/QLNT_300x180.png"));
+        Image scaledImg = logoIcon.getImage().getScaledInstance(450, 270, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledImg), SwingConstants.CENTER);
         logoLabel.setBorder(BorderFactory.createEmptyBorder(60, 10, 5, 10));
 
         // Tiêu đề
-        JLabel title = new JLabel("PHẦN MỀM QUẢN LÝ NHÀ TRỌ");
+        JLabel title = new JLabel("NHÀ TRỌ THÔNG MINH");
         title.setFont(new Font("Segoe UI", Font.BOLD, 28));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setForeground(new Color(0, 102, 204));

@@ -25,10 +25,10 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() throws SQLException {
         initComponents();
 
-        // Đặt logo cho button
-        ImageIcon icon = new ImageIcon(getClass().getResource("/img/LOGO_01N.png"));
-        Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        btnLOGO.setIcon(new ImageIcon(img));
+//        // Đặt logo cho button
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/img/QLTN_100.png"));
+//        Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+//        btnLOGO.setIcon(new ImageIcon(img));
 
         // Xóa viền, nền để logo phẳng
         btnLOGO.setBorderPainted(false);
@@ -175,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnLOGO.setBackground(new java.awt.Color(204, 204, 204));
         btnLOGO.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOGO_01N.png"))); // NOI18N
+        btnLOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/QLNT_100.png"))); // NOI18N
         btnLOGO.setBorder(null);
         btnLOGO.setBorderPainted(false);
         btnLOGO.setNextFocusableComponent(btnKhachThue);
@@ -189,15 +189,15 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("QUẢN LÝ NHÀ TRỌ");
+        jLabel1.setText("NHÀ TRỌ THÔNG MINH");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout LogoPanelLayout = new javax.swing.GroupLayout(LogoPanel);
         LogoPanel.setLayout(LogoPanelLayout);
         LogoPanelLayout.setHorizontalGroup(
             LogoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnLOGO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+            .addComponent(btnLOGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         LogoPanelLayout.setVerticalGroup(
             LogoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

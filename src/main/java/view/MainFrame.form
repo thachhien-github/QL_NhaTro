@@ -165,8 +165,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnLOGO" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="275" max="32767" attributes="0"/>
+                  <Component id="btnLOGO" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -189,7 +189,7 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/LOGO_01N.png"/>
+                  <Image iconType="3" name="/img/QLNT_100.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -213,7 +213,7 @@
                   <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; NH&#xc0; TR&#x1ecc;"/>
+                <Property name="text" type="java.lang.String" value="NH&#xc0; TR&#x1ecc; TH&#xd4;NG MINH"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
