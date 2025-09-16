@@ -11,6 +11,7 @@ import dao.XeDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
@@ -27,7 +28,6 @@ public class HoaDonPanel extends javax.swing.JPanel implements RefreshablePanel 
     private PhongDAO phongDAO = new PhongDAO();
     private ChiSoDAO chiSoDAO = new ChiSoDAO();
     private XeDAO xeDAO = new XeDAO();
-
 
     private DefaultTableModel tableModel;
 
@@ -475,7 +475,119 @@ public class HoaDonPanel extends javax.swing.JPanel implements RefreshablePanel 
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
-        JOptionPane.showMessageDialog(this, "Chức năng in hóa đơn sẽ được triển khai trong tương lai!");
+        try {
+            if (txtMaHDon.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần in!");
+                return;
+            }
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn nơi lưu hóa đơn");
+            fileChooser.setSelectedFile(new java.io.File("HoaDon_" + txtMaHDon.getText() + ".pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(this);
+            if (userSelection != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
+
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getName().toLowerCase().endsWith(".pdf")) {
+                fileToSave = new java.io.File(fileToSave.getAbsolutePath() + ".pdf");
+            }
+
+            // Format tiền
+            java.text.DecimalFormat df = new java.text.DecimalFormat("#,### VNĐ");
+
+            // Font hỗ trợ tiếng Việt
+            com.itextpdf.text.pdf.BaseFont bf = com.itextpdf.text.pdf.BaseFont.createFont(
+                    "c:/windows/fonts/times.ttf",
+                    com.itextpdf.text.pdf.BaseFont.IDENTITY_H,
+                    com.itextpdf.text.pdf.BaseFont.EMBEDDED);
+            com.itextpdf.text.Font fontTitle = new com.itextpdf.text.Font(bf, 20, com.itextpdf.text.Font.BOLD);
+            com.itextpdf.text.Font fontNormal = new com.itextpdf.text.Font(bf, 12);
+            com.itextpdf.text.Font fontBold = new com.itextpdf.text.Font(bf, 12, com.itextpdf.text.Font.BOLD);
+
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+            com.itextpdf.text.pdf.PdfWriter.getInstance(document, new java.io.FileOutputStream(fileToSave));
+            document.open();
+
+            // ===== tên công ty =====
+            com.itextpdf.text.Paragraph tenPhongTro = new com.itextpdf.text.Paragraph("HP APARTMENT", fontBold);
+            tenPhongTro.setAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+            document.add(tenPhongTro);
+
+            // ===== Tiêu đề =====
+            com.itextpdf.text.Paragraph title = new com.itextpdf.text.Paragraph("HÓA ĐƠN PHÒNG TRỌ", fontTitle);
+            title.setAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+            title.setSpacingBefore(10);
+            title.setSpacingAfter(20);
+            document.add(title);
+
+            // ===== Bảng nội dung =====
+            com.itextpdf.text.pdf.PdfPTable table = new com.itextpdf.text.pdf.PdfPTable(2);
+            table.setWidthPercentage(90);
+            table.setSpacingBefore(10);
+            table.setSpacingAfter(20);
+
+            // Tạo cell helper
+            com.itextpdf.text.pdf.PdfPCell cell;
+
+            table.addCell(new com.itextpdf.text.Phrase("Mã hóa đơn:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(txtMaHDon.getText(), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Mã phòng:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(cboMaPhong.getSelectedItem().toString(), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Tháng/Năm:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(cboThang.getSelectedItem() + "/" + cboNam.getSelectedItem(), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Tiền phòng:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(df.format(Double.parseDouble(txtTienPhong.getText())), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Tiền điện:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(df.format(Double.parseDouble(txtTienDien.getText())), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Tiền nước:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(df.format(Double.parseDouble(txtTienNuoc.getText())), fontNormal));
+
+            table.addCell(new com.itextpdf.text.Phrase("Tiền xe:", fontNormal));
+            table.addCell(new com.itextpdf.text.Phrase(df.format(Double.parseDouble(txtTienXe.getText())), fontNormal));
+
+            // Tổng tiền nổi bật
+            cell = new com.itextpdf.text.pdf.PdfPCell(new com.itextpdf.text.Phrase("TỔNG TIỀN:", fontBold));
+            cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_RIGHT);
+            cell.setBackgroundColor(com.itextpdf.text.BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+
+            cell = new com.itextpdf.text.pdf.PdfPCell(new com.itextpdf.text.Phrase(df.format(Double.parseDouble(txtTongTien.getText())), fontBold));
+            cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_RIGHT);
+            cell.setBackgroundColor(com.itextpdf.text.BaseColor.YELLOW);
+            table.addCell(cell);
+
+            document.add(table);
+
+            // ===== Chữ ký =====
+            com.itextpdf.text.Paragraph camOn = new com.itextpdf.text.Paragraph("Cảm ơn bạn đã sử dụng dịch vụ!", fontNormal);
+            camOn.setAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+            camOn.setSpacingBefore(30);
+            document.add(camOn);
+
+            com.itextpdf.text.Paragraph kyTen = new com.itextpdf.text.Paragraph("Người lập hóa đơn", fontNormal);
+            kyTen.setAlignment(com.itextpdf.text.Element.ALIGN_RIGHT);
+            kyTen.setSpacingBefore(50);
+            document.add(kyTen);
+
+            document.close();
+
+            JOptionPane.showMessageDialog(this, "Xuất hóa đơn thành công!\nFile: " + fileToSave.getAbsolutePath());
+            if (java.awt.Desktop.isDesktopSupported()) {
+                java.awt.Desktop.getDesktop().open(fileToSave);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi in hóa đơn: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed

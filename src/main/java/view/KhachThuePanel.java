@@ -17,7 +17,7 @@ import util.RefreshablePanel;
  *
  * @author ADMIN
  */
-public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePanel{
+public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePanel {
 
     // Khai báo DAO
     private KhachThueDAO khachThueDAO;
@@ -111,6 +111,8 @@ public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePan
         jLabel5.setText("Số điện thoại");
 
         jLabel7.setText("Mã khách hàng");
+
+        txtMaKH.setEnabled(false);
 
         jLabel6.setText("Giới tính");
 
@@ -398,7 +400,12 @@ public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePan
         txtMaPhong.setText("");
         buttonGroup1.clearSelection();
         dtpNgaySinh.setDate(null);
-        refreshData();
+
+        // Cho phép nhập lại Mã KH
+        txtMaKH.setEnabled(true);
+        txtMaKH.setEditable(true);
+
+        refreshData(); // Gọi hàm load lại dữ liệu
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -445,6 +452,9 @@ public class KhachThuePanel extends javax.swing.JPanel implements RefreshablePan
             txtDienThoai.setText(tblKhachHang.getValueAt(row, 5).toString());
             txtDiaChi.setText(tblKhachHang.getValueAt(row, 6).toString());
             txtMaPhong.setText(tblKhachHang.getValueAt(row, 7).toString());
+
+            // 🔒 Khóa lại ô nhập Mã KH
+            txtMaKH.setEditable(false);
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
