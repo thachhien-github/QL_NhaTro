@@ -4,17 +4,6 @@
  */
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 /**
  *
  * @author ThachHien
@@ -26,37 +15,6 @@ public class HomePanel extends javax.swing.JPanel {
      */
     public HomePanel() {
         initComponents();
-        // Logo
-        ImageIcon logoIcon = new ImageIcon(getClass().getResource("/img/QLNT_300x180.png"));
-        Image scaledImg = logoIcon.getImage().getScaledInstance(450, 270, Image.SCALE_SMOOTH);
-        JLabel logoLabel = new JLabel(new ImageIcon(scaledImg), SwingConstants.CENTER);
-        logoLabel.setBorder(BorderFactory.createEmptyBorder(60, 10, 5, 10));
-
-        // Tiêu đề
-        JLabel title = new JLabel("NHÀ TRỌ THÔNG MINH");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setForeground(new Color(0, 102, 204));
-        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0)); 
-
-        // Phụ đề
-        JLabel subtitle = new JLabel("Dễ dàng - Nhanh chóng - Chính xác");
-        subtitle.setFont(new Font("Segoe UI", Font.ITALIC, 16));
-        subtitle.setHorizontalAlignment(SwingConstants.CENTER);
-        subtitle.setForeground(new Color(100, 100, 100));
-        subtitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
-
-        // Panel chữ
-        JPanel textPanel = new JPanel(new GridLayout(2, 1));
-        textPanel.add(title);
-        textPanel.add(subtitle);
-        textPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0)); 
-
-        // Bố cục
-        setLayout(new BorderLayout(10, 20));
-        add(logoLabel, BorderLayout.CENTER);
-        add(textPanel, BorderLayout.SOUTH);
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
     }
 
     /**
@@ -68,19 +26,52 @@ public class HomePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/QLNT_400.png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("NHÀ TRỌ THÔNG MINH");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Dễ dàng - Nhanh chóng - Chính xác");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 793, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
