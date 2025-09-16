@@ -149,13 +149,6 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE sp_XemPhong
-AS
-BEGIN
-    SELECT * FROM Phong;
-END;
-GO
-
 -- ===== KHÁCH THUÊ =====
 CREATE PROCEDURE sp_ThemKhach
     @MaKT VARCHAR(10),
@@ -227,15 +220,6 @@ BEGIN
 END;
 GO
 
-
-
-CREATE PROCEDURE sp_XemKhach
-AS
-BEGIN
-    SELECT * FROM KhachThue;
-END;
-GO
-
 -- ===== HỢP ĐỒNG =====
 CREATE PROCEDURE sp_ThemHopDong
     @MaHD VARCHAR(10),
@@ -269,12 +253,6 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE sp_XemHopDong
-AS
-BEGIN
-    SELECT * FROM HopDong;
-END;
-GO
 
 -- ===== XE =====
 CREATE PROCEDURE sp_ThemXe
@@ -311,12 +289,6 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE sp_XemXe
-AS
-BEGIN
-    SELECT * FROM Xe;
-END;
-GO
 
 -- ===== HÓA ĐƠN =====
 CREATE PROCEDURE sp_ThemHoaDon
@@ -332,13 +304,6 @@ AS
 BEGIN
     INSERT INTO HoaDon(MaHDon, MaPhong, Thang, Nam, TienPhong, TienDien, TienNuoc, TienXe)
     VALUES(@MaHDon,@MaPhong,@Thang,@Nam,@TienPhong,@TienDien,@TienNuoc,@TienXe);
-END;
-GO
-
-CREATE PROCEDURE sp_XemHoaDon
-AS
-BEGIN
-    SELECT * FROM HoaDon;
 END;
 GO
 
@@ -467,12 +432,7 @@ VALUES
 ('P102', 8, 2025, 1500000, 40*3500, 20*15000, 120000);
 
 
-EXEC sp_XemPhong;
-EXEC sp_XemKhach;
-EXEC sp_XemHopDong;
-EXEC sp_XemXe;
 EXEC sp_XemChiSo;
-EXEC sp_XemHoaDon;
 
 SELECT * FROM v_HoaDonChiTiet;
 

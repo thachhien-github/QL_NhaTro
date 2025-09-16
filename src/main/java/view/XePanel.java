@@ -47,19 +47,17 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel {
 
         // Sự kiện thay đổi loại xe
         cboLoaiXe.addActionListener(e -> {
-            if (txtMaXe.getText().isEmpty()) { // chỉ khi thêm mới (Mã xe rỗng)
-                String loai = (String) cboLoaiXe.getSelectedItem();
-                switch (loai) {
-                    case "Xe số":
-                        txtPhiGiuXe.setText("100000");
-                        break;
-                    case "Xe tay ga":
-                        txtPhiGiuXe.setText("120000");
-                        break;
-                    case "Xe đạp":
-                        txtPhiGiuXe.setText("50000");
-                        break;
-                }
+            String loai = (String) cboLoaiXe.getSelectedItem();
+            switch (loai) {
+                case "Xe số":
+                    txtPhiGiuXe.setText("100000");
+                    break;
+                case "Xe tay ga":
+                    txtPhiGiuXe.setText("120000");
+                    break;
+                case "Xe đạp":
+                    txtPhiGiuXe.setText("50000");
+                    break;
             }
         });
 
@@ -96,18 +94,21 @@ public class XePanel extends javax.swing.JPanel implements RefreshablePanel {
         cboLoaiXe.setSelectedIndex(0); // mặc định "Xe số"
 
         // Load giá mặc định theo loại xe (chỉ khi thêm mới)
-        String loai = (String) cboLoaiXe.getSelectedItem();
-        switch (loai) {
-            case "Xe số":
-                txtPhiGiuXe.setText("100000");
-                break;
-            case "Xe tay ga":
-                txtPhiGiuXe.setText("120000");
-                break;
-            case "Xe đạp":
-                txtPhiGiuXe.setText("50000");
-                break;
-        }
+        cboLoaiXe.addActionListener(e -> {
+            String loai = (String) cboLoaiXe.getSelectedItem();
+            switch (loai) {
+                case "Xe số":
+                    txtPhiGiuXe.setText("100000");
+                    break;
+                case "Xe tay ga":
+                    txtPhiGiuXe.setText("120000");
+                    break;
+                case "Xe đạp":
+                    txtPhiGiuXe.setText("50000");
+                    break;
+            }
+        });
+
     }
 
     /**

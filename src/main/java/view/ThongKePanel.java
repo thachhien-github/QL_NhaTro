@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.DBConnection;
 import util.RefreshablePanel;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel {
 
@@ -176,9 +182,161 @@ public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel
         }
     }
 
+    private void exportToExcel() {
+        try {
+            int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
+            boolean theoNam = chkTheoNam.isSelected();
+            String fileName;
+            String title;
+            if (theoNam) {
+                fileName = "ThongKe_Nam_" + nam + ".xlsx";
+                title = "BÁO CÁO THỐNG KÊ NĂM " + nam;
+            } else {
+                int thang = Integer.parseInt(cboThang.getSelectedItem().toString());
+                fileName = "ThongKe_Thang_" + thang + "_Nam_" + nam + ".xlsx";
+                title = "BÁO CÁO THỐNG KÊ THÁNG " + thang + " NĂM " + nam;
+            }
+
+            JFileChooser chooser = new JFileChooser();
+            chooser.setSelectedFile(new File(fileName));
+            int result = chooser.showSaveDialog(this);
+            if (result != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
+            File saveFile = chooser.getSelectedFile();
+
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Thống kê");
+
+            // Font + Style tiêu đề
+            CellStyle titleStyle = workbook.createCellStyle();
+            Font titleFont = workbook.createFont();
+            titleFont.setFontHeightInPoints((short) 16);
+            titleFont.setBold(true);
+            titleStyle.setFont(titleFont);
+            titleStyle.setAlignment(HorizontalAlignment.CENTER);
+
+            // Tạo row tiêu đề
+            Row titleRow = sheet.createRow(0);
+            Cell titleCell = titleRow.createCell(0);
+            titleCell.setCellValue(title);
+            titleCell.setCellStyle(titleStyle);
+            sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, tableModel.getColumnCount() - 1));
+
+            // Style header
+            CellStyle headerStyle = workbook.createCellStyle();
+            Font headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerStyle.setFont(headerFont);
+            headerStyle.setAlignment(HorizontalAlignment.CENTER);
+            headerStyle.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
+            headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            headerStyle.setBorderBottom(BorderStyle.THIN);
+            headerStyle.setBorderTop(BorderStyle.THIN);
+            headerStyle.setBorderLeft(BorderStyle.THIN);
+            headerStyle.setBorderRight(BorderStyle.THIN);
+
+            // Style tiền
+            CellStyle moneyStyle = workbook.createCellStyle();
+            DataFormat format = workbook.createDataFormat();
+            moneyStyle.setDataFormat(format.getFormat("#,##0 \"đ\""));
+            moneyStyle.setBorderBottom(BorderStyle.THIN);
+            moneyStyle.setBorderTop(BorderStyle.THIN);
+            moneyStyle.setBorderLeft(BorderStyle.THIN);
+            moneyStyle.setBorderRight(BorderStyle.THIN);
+
+            // Style ô thường
+            CellStyle normalStyle = workbook.createCellStyle();
+            normalStyle.setBorderBottom(BorderStyle.THIN);
+            normalStyle.setBorderTop(BorderStyle.THIN);
+            normalStyle.setBorderLeft(BorderStyle.THIN);
+            normalStyle.setBorderRight(BorderStyle.THIN);
+
+            // Header row
+            Row headerRow = sheet.createRow(1);
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(tableModel.getColumnName(i));
+                cell.setCellStyle(headerStyle);
+            }
+
+            // Dữ liệu + cộng tổng
+            double[] tongCong = new double[tableModel.getColumnCount()];
+            for (int r = 0; r < tableModel.getRowCount(); r++) {
+                Row row = sheet.createRow(r + 2);
+                for (int c = 0; c < tableModel.getColumnCount(); c++) {
+                    Object value = tableModel.getValueAt(r, c);
+                    Cell cell = row.createCell(c);
+
+                    if (isTienColumn(tableModel.getColumnName(c))) {
+                        double v = 0;
+                        if (value != null && !value.toString().isEmpty()) {
+                            try {
+                                v = Double.parseDouble(value.toString().replaceAll("[^0-9]", ""));
+                            } catch (NumberFormatException ex) {
+                                v = 0;
+                            }
+                        }
+                        tongCong[c] += v;
+                        cell.setCellValue(v);
+                        cell.setCellStyle(moneyStyle);
+                    } else {
+                        cell.setCellValue(value != null ? value.toString() : "");
+                        cell.setCellStyle(normalStyle);
+                    }
+                }
+            }
+
+            // Hàng tổng cộng
+            Row totalRow = sheet.createRow(tableModel.getRowCount() + 2);
+            Cell totalLabelCell = totalRow.createCell(0);
+            totalLabelCell.setCellValue("TỔNG CỘNG");
+            totalLabelCell.setCellStyle(headerStyle);
+
+            for (int c = 1; c < tableModel.getColumnCount(); c++) {
+                Cell cell = totalRow.createCell(c);
+                if (isTienColumn(tableModel.getColumnName(c))) {
+                    cell.setCellValue(tongCong[c]);
+                    cell.setCellStyle(moneyStyle);
+                } else {
+                    cell.setCellStyle(normalStyle);
+                }
+            }
+
+            // Auto resize
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+            FileOutputStream fos = new FileOutputStream(saveFile);
+            workbook.write(fos);
+            fos.close();
+            workbook.close();
+
+            JOptionPane.showMessageDialog(this, "Xuất Excel thành công: " + saveFile.getAbsolutePath());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi xuất Excel: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+// Chỉ tính cho các cột tiền cụ thể
+    private boolean isTienColumn(String columnName) {
+        if (columnName == null) {
+            return false;
+        }
+        String name = columnName.trim().toLowerCase();
+        return name.equals("tiền phòng")
+                || name.equals("tiền điện")
+                || name.equals("tiền nước")
+                || name.equals("tiền xe")
+                || name.equals("tổng tiền");
+    }
+
     @Override
     public void refreshData() {
-        autoLoadData();  // hoặc gọi loadData(0, năm, true) nếu muốn refresh mặc định
+        loadComboBox();  // load lại danh sách năm, tháng
+        autoLoadData();  // load dữ liệu theo lựa chọn hiện tại
     }
 
     @SuppressWarnings("unchecked")
@@ -385,12 +543,15 @@ public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel
 
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("năm");
 
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Tháng");
 
+        chkTheoNam.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         chkTheoNam.setText("Theo năm");
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
@@ -476,11 +637,11 @@ public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cboThang, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cboThang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chkTheoNam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cboNam))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -615,7 +776,8 @@ public class ThongKePanel extends javax.swing.JPanel implements RefreshablePanel
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        
+        //Xuất ra Excel
+        exportToExcel();
     }//GEN-LAST:event_btnThongKeActionPerformed
 
 

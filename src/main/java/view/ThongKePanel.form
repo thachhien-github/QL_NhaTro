@@ -97,11 +97,11 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnThongKe" pref="32" max="32767" attributes="0"/>
                       <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
-                      <Component id="cboThang" alignment="1" max="32767" attributes="0"/>
+                      <Component id="cboThang" alignment="1" pref="32" max="32767" attributes="0"/>
                       <Component id="jLabel11" alignment="1" max="32767" attributes="0"/>
                       <Component id="chkTheoNam" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnThongKe" alignment="0" max="32767" attributes="0"/>
                       <Component id="cboNam" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -415,6 +415,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="n&#x103;m"/>
           </Properties>
         </Component>
@@ -435,11 +438,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Th&#xe1;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkTheoNam">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Theo n&#x103;m"/>
           </Properties>
         </Component>
